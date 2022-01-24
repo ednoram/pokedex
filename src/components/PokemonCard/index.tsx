@@ -16,10 +16,12 @@ const fetch = (url: string) => axios.get(url).then((res) => res.data);
 const PokemonCard: FC<IProps> = ({ url }) => {
   const { data } = useSWR(url, fetch, { errorRetryCount: 1 });
 
-  const pokemonId = "#" + ("00" + data.id).slice(-3);
-  const pokemonTypes = data.types
-    ?.map(({ type }: { type: { name: string } }) => type.name)
-    .join(", ");
+  const pokemonId = data ? "#" + ("00" + data.id).slice(-3) : "";
+  const pokemonTypes = data?.types
+    ? data.types
+        ?.map(({ type }: { type: { name: string } }) => type.name)
+        .join(", ")
+    : [];
 
   return (
     <div className={styles.content}>
