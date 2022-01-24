@@ -1,13 +1,15 @@
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchPokemons } from "store/actions";
-import { selectPokemonsData } from "store/selectors";
+import { IPokemon } from "types/index";
+import { fetchPokemons } from "actions/index";
+import { PokemonCard } from "components/index";
+import { selectPokemonsData } from "selectors/index";
 
 import styles from "./Home.module.scss";
 
 const HomeContainer: FC = () => {
-  const pokemonsData = useSelector(selectPokemonsData);
+  const { pokemons } = useSelector(selectPokemonsData);
 
   const dispatch = useDispatch();
 
@@ -18,7 +20,13 @@ const HomeContainer: FC = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.container__title}>Pokédex</h1>
-      {JSON.stringify(pokemonsData.pokemons)}
+      <ul className={styles.container__list}>
+        {pokemons.map(({ url, name }: IPokemon) => (
+          <li key={name}>
+            <PokemonCard url={url} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

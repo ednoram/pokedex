@@ -23,7 +23,11 @@
       "styles/*": ["src/styles/*"],
       "layouts/*": ["src/layouts/*"],
       "constants/*": ["src/constants/*"],
+      "components/*": ["src/components/*"],
       "containers/*": ["src/containers/*"],
+      "actions/*": ["src/store/actions/*"],
+      "reducers/*": ["src/store/reducers/*"],
+      "selectors/*": ["src/store/selectors/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
