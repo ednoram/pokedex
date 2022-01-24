@@ -5,7 +5,10 @@ import { HomeContainer } from "containers/index";
 
 const Home: NextPage = () => {
   return (
-    <HelmetLayout title="Pokédex" metaDescription="Pokémon list">
+    <HelmetLayout
+      title="Pokédex"
+      metaDescription="Explore Pokémon from the original Pokémon API."
+    >
       <HomeContainer />
     </HelmetLayout>
   );
