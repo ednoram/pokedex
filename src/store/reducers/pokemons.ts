@@ -1,27 +1,22 @@
 import { IPokemon } from "types/index";
 
-export const SET_DATA = "SET_DATA";
+export const SET_POKEMONS_DATA = "SET_POKEMONS_DATA";
 
 interface IPokemonsAction {
   type: string;
   payload: {
-    limit: number;
-    offset: number;
+    count: number;
     pokemons: IPokemon[];
   };
 }
 
 export interface IPokemonsState {
   count: number;
-  limit: number;
-  offset: number;
   pokemons: IPokemon[];
 }
 
 const INITIAL_STATE: IPokemonsState = {
   count: 0,
-  limit: 0,
-  offset: 0,
   pokemons: [],
 };
 
@@ -30,7 +25,7 @@ const pokemonsReducer = (
   { type, payload }: IPokemonsAction
 ) => {
   switch (type) {
-    case SET_DATA:
+    case SET_POKEMONS_DATA:
       return { ...state, ...payload };
     default:
       return state;

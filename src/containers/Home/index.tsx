@@ -1,21 +1,43 @@
 import React, { FC, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IPokemon } from "types/index";
+import { setQueryParams } from "utils/index";
 import { fetchPokemons } from "actions/index";
-import { PokemonCard } from "components/index";
 import { selectPokemonsData } from "selectors/index";
+import { Pagination, PokemonCard } from "components/index";
 
 import styles from "./Home.module.scss";
 
 const HomeContainer: FC = () => {
-  const { pokemons } = useSelector(selectPokemonsData);
+  const { pokemons, count } = useSelector(selectPokemonsData);
 
+  const router = useRouter();
   const dispatch = useDispatch();
 
+  const { query } = router;
+
+  const limit = query?.limit ? Number(query.limit) : null;
+  const offset = query?.offset ? Number(query.offset) : null;
+
+  const paginationIsSet = offset !== null && limit !== null;
+
   useEffect(() => {
-    dispatch(fetchPokemons(0, 20));
-  }, []);
+    if (!router.isReady) return;
+
+    window.scroll(0, 0);
+
+    if (paginationIsSet) {
+      dispatch(fetchPokemons(offset, limit));
+    } else {
+      setQueryParams({ offset: "0", limit: "20" });
+    }
+  }, [limit, offset]);
+
+  const updatePaginationParams = (offset: number, limit: number) => {
+    setQueryParams({ offset: String(offset), limit: String(limit) });
+  };
 
   return (
     <div className={styles.container}>
@@ -27,6 +49,16 @@ const HomeContainer: FC = () => {
           </li>
         ))}
       </ul>
+      <div className={styles.container__pagination}>
+        {paginationIsSet && (
+          <Pagination
+            limit={limit}
+            offset={offset}
+            totalCount={count}
+            updateParams={updatePaginationParams}
+          />
+        )}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,26 @@
+.content {
+  display: flex;
+  font-weight: 500;
+  color: $primaryColor;
+  box-shadow: $boxShadow;
+  margin-top: 40px;
+
+  &__button {
+    background-color: white;
+    color: $primaryColor;
+    user-select: none;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+
+    &_active {
+      background-color: $primaryColor;
+      color: white;
+    }
+
+    &_prev_next {
+      @extend .content__button;
+      width: 60px;
+    }
+  }
+}
