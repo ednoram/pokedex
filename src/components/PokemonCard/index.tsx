@@ -3,7 +3,11 @@ import useSWR from "swr";
 import axios from "axios";
 import Image from "next/image";
 
-import { processPokemonName, getPokemonAvatarSrc } from "utils/index";
+import {
+  processPokemonName,
+  getPokemonIdString,
+  getPokemonAvatarSrc,
+} from "utils/index";
 
 import styles from "./PokemonCard.module.scss";
 
@@ -16,7 +20,7 @@ const fetch = (url: string) => axios.get(url).then((res) => res.data);
 const PokemonCard: FC<IProps> = ({ url }) => {
   const { data } = useSWR(url, fetch, { errorRetryCount: 1 });
 
-  const pokemonId = data ? "#" + ("00" + data.id).slice(-3) : "";
+  const pokemonIdString = data ? "#" + getPokemonIdString(data.id) : "";
   const pokemonTypes = data?.types
     ? data.types
         ?.map(({ type }: { type: { name: string } }) => type.name)
@@ -40,7 +44,7 @@ const PokemonCard: FC<IProps> = ({ url }) => {
             <p className={styles.content__name}>
               {processPokemonName(data.name)}
             </p>
-            <p className={styles.content__id}>{pokemonId}</p>
+            <p className={styles.content__id}>{pokemonIdString}</p>
             <p className={styles.content__types}>{pokemonTypes}</p>
           </div>
         </>

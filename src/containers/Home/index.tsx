@@ -43,7 +43,7 @@ const HomeContainer: FC = () => {
     <div className={styles.container}>
       <h1 className={styles.container__title}>Pokédex</h1>
       <ul className={styles.container__list}>
-        {pokemons.map(({ url, name }: IPokemon) => (
+        {pokemons?.map(({ url, name }: IPokemon) => (
           <li key={name}>
             <PokemonCard url={url} />
           </li>

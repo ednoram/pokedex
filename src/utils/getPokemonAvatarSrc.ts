@@ -1,6 +1,9 @@
-import { assetsUrl } from "constants/index";
+import { ASSETS_URL } from "constants/index";
+import { getPokemonIdString } from "utils/index";
 
-const getPokemonAvatarSrc = (id: number): string =>
-  `${assetsUrl}/${("00" + id).slice(-3)}.png`;
+const getPokemonAvatarSrc = (id: number): string => {
+  const idString = getPokemonIdString(id);
+  return `${ASSETS_URL}/${idString}.png`;
+};
 
 export default getPokemonAvatarSrc;

@@ -5,7 +5,6 @@ export const SET_POKEMONS_DATA = "SET_POKEMONS_DATA";
 interface IPokemonsAction {
   type: string;
   payload: {
-    count: number;
     pokemons: IPokemon[];
   };
 }
@@ -16,7 +15,7 @@ export interface IPokemonsState {
 }
 
 const INITIAL_STATE: IPokemonsState = {
-  count: 0,
+  count: 898,
   pokemons: [],
 };
 
@@ -26,7 +25,7 @@ const pokemonsReducer = (
 ) => {
   switch (type) {
     case SET_POKEMONS_DATA:
-      return { ...state, ...payload };
+      return { ...state, pokemons: payload.pokemons };
     default:
       return state;
   }
