@@ -1,6 +1,7 @@
 import { IPokemon } from "types/index";
 
-export const SET_POKEMONS_DATA = "SET_POKEMONS_DATA";
+export const FETCH_POKEMONS_STARTED = "FETCH_POKEMONS_STARTED";
+export const FETCH_POKEMONS_FINISHED = "FETCH_POKEMONS_FINISHED";
 
 interface IPokemonsAction {
   type: string;
@@ -11,12 +12,14 @@ interface IPokemonsAction {
 
 export interface IPokemonsState {
   count: number;
+  loading: boolean;
   pokemons: IPokemon[];
 }
 
 const INITIAL_STATE: IPokemonsState = {
   count: 898,
   pokemons: [],
+  loading: false,
 };
 
 const pokemonsReducer = (
@@ -24,8 +27,12 @@ const pokemonsReducer = (
   { type, payload }: IPokemonsAction
 ) => {
   switch (type) {
-    case SET_POKEMONS_DATA:
-      return { ...state, pokemons: payload.pokemons };
+    case FETCH_POKEMONS_STARTED:
+      return { ...state, loading: true, pokemons: [] };
+
+    case FETCH_POKEMONS_FINISHED:
+      return { ...state, loading: false, pokemons: payload.pokemons };
+
     default:
       return state;
   }

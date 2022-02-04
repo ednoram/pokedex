@@ -6,12 +6,12 @@ import { IPokemon } from "types/index";
 import { setQueryParams } from "utils/index";
 import { fetchPokemons } from "actions/index";
 import { selectPokemonsData } from "selectors/index";
-import { Pagination, PokemonCard } from "components/index";
+import { Loader, Pagination, PokemonCard } from "components/index";
 
 import styles from "./Home.module.scss";
 
 const HomeContainer: FC = () => {
-  const { pokemons, count } = useSelector(selectPokemonsData);
+  const { pokemons, count, loading } = useSelector(selectPokemonsData);
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -42,13 +42,19 @@ const HomeContainer: FC = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.container__title}>Pokédex</h1>
-      <ul className={styles.container__list}>
-        {pokemons?.map(({ url, name }: IPokemon) => (
-          <li key={name}>
-            <PokemonCard url={url} />
-          </li>
-        ))}
-      </ul>
+      {!loading ? (
+        <ul className={styles.container__list}>
+          {pokemons?.map(({ url, name }: IPokemon) => (
+            <li key={name}>
+              <PokemonCard url={url} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className={styles.container__loader}>
+          <Loader />
+        </div>
+      )}
       <div className={styles.container__pagination}>
         {paginationIsSet && (
           <Pagination

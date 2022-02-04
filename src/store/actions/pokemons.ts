@@ -4,14 +4,21 @@ import { API } from "constants/index";
 import { IPokemon } from "types/index";
 import { createAction } from "utils/index";
 
-import { SET_POKEMONS_DATA } from "store/reducers/pokemons";
+import {
+  FETCH_POKEMONS_STARTED,
+  FETCH_POKEMONS_FINISHED,
+} from "store/reducers/pokemons";
 
-const setPokemonsData = (data: IPokemon[]) =>
-  createAction(SET_POKEMONS_DATA, { pokemons: data });
+const fetchPokemonsStarted = () => createAction(FETCH_POKEMONS_STARTED, {});
+
+const fetchPokemonsFinished = (data: IPokemon[]) =>
+  createAction(FETCH_POKEMONS_FINISHED, { pokemons: data });
 
 export const fetchPokemons =
   (offset: number, limit: number) => async (dispatch: Dispatch) => {
     try {
+      dispatch(fetchPokemonsStarted());
+
       const { data } = await API.get("pokemon", { params: { offset, limit } });
 
       // There are Pokémon in the api with ids > 10000 that we don't need
@@ -23,7 +30,7 @@ export const fetchPokemons =
           })
         : [];
 
-      dispatch(setPokemonsData(filteredResults));
+      dispatch(fetchPokemonsFinished(filteredResults));
     } catch {
       alert("Something went wrong.");
     }

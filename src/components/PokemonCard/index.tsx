@@ -2,12 +2,15 @@ import React, { FC } from "react";
 import useSWR from "swr";
 import axios from "axios";
 import Image from "next/image";
+import classNames from "classnames";
 
 import {
   processPokemonName,
   getPokemonIdString,
   getPokemonAvatarSrc,
 } from "utils/index";
+import { Loader } from "components/index";
+import utilStyles from "styles/utils.module.scss";
 
 import styles from "./PokemonCard.module.scss";
 
@@ -18,7 +21,7 @@ interface IProps {
 const fetch = (url: string) => axios.get(url).then((res) => res.data);
 
 const PokemonCard: FC<IProps> = ({ url }) => {
-  const { data } = useSWR(url, fetch, { errorRetryCount: 1 });
+  const { data, error } = useSWR(url, fetch, { errorRetryCount: 1 });
 
   const pokemonIdString = data ? "#" + getPokemonIdString(data.id) : "";
   const pokemonTypes = data?.types
@@ -28,7 +31,11 @@ const PokemonCard: FC<IProps> = ({ url }) => {
     : [];
 
   return (
-    <div className={styles.content}>
+    <div
+      className={classNames(styles.content, {
+        [utilStyles.flex_center]: error || !data,
+      })}
+    >
       {data ? (
         <>
           <div className={styles.content__avatar}>
@@ -49,7 +56,7 @@ const PokemonCard: FC<IProps> = ({ url }) => {
           </div>
         </>
       ) : (
-        <p>loading</p>
+        <Loader />
       )}
     </div>
   );
