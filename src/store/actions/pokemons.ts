@@ -5,7 +5,7 @@ import { IPokemon } from "types/index";
 import { createAction } from "utils/index";
 
 import {
-  SET_PAGINATION,
+  SET_PAGE,
   FETCH_POKEMONS_START,
   FETCH_POKEMONS_ERROR,
   FETCH_POKEMONS_SUCCESS,
@@ -18,13 +18,7 @@ const fetchPokemonsError = () => createAction(FETCH_POKEMONS_ERROR, {});
 const fetchPokemonsSuccess = (data: IPokemon[]) =>
   createAction(FETCH_POKEMONS_SUCCESS, { pokemons: data });
 
-export const setPagination = ({
-  limit,
-  offset,
-}: {
-  limit: number;
-  offset: number;
-}) => createAction(SET_PAGINATION, { offset, limit });
+export const setPage = (page: number) => createAction(SET_PAGE, { page });
 
 export const fetchPokemons = () => async (dispatch: Dispatch) => {
   try {

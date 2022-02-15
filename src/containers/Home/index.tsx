@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IPokemon } from "types/index";
@@ -9,9 +9,11 @@ import { Pagination, PokemonCard } from "components/index";
 import styles from "./Home.module.scss";
 
 const HomeContainer: FC = () => {
-  const { pokemons, count, limit, offset } = useSelector(
+  const visiblePokemons = useSelector(pokemonSelectors.selectVisiblePokemons);
+  const { count, limit, offset } = useSelector(
     pokemonSelectors.selectPokemonsData
   );
+  const currentPage = useSelector(pokemonSelectors.selectCurrentPage);
 
   const dispatch = useDispatch();
 
@@ -19,31 +21,30 @@ const HomeContainer: FC = () => {
     window.scroll(0, 0);
   }, [limit, offset]);
 
-  const updatePaginationParams = (newOffset: number, newLimit: number) => {
-    dispatch(
-      pokemonActions.setPagination({ offset: newOffset, limit: newLimit })
-    );
+  const setPage = (page: number) => {
+    dispatch(pokemonActions.setPage(page));
   };
+
+  const pokemonCards = useMemo(
+    () =>
+      visiblePokemons.map(({ url, name }: IPokemon) => (
+        <li key={name}>
+          <PokemonCard url={url} />
+        </li>
+      )),
+    [visiblePokemons]
+  );
 
   return (
     <div className={styles.container}>
       <h1 className={styles.container__title}>Pokédex</h1>
-      <ul className={styles.container__list}>
-        {pokemons &&
-          pokemons
-            .slice(offset, offset + limit)
-            .map(({ url, name }: IPokemon) => (
-              <li key={name}>
-                <PokemonCard url={url} />
-              </li>
-            ))}
-      </ul>
+      <ul className={styles.container__list}>{pokemonCards}</ul>
       <div className={styles.container__pagination}>
         <Pagination
           limit={limit}
-          offset={offset}
+          setPage={setPage}
           totalCount={count}
-          updateParams={updatePaginationParams}
+          currentPage={currentPage}
         />
       </div>
     </div>

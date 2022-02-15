@@ -7,18 +7,17 @@ import styles from "./Pagination.module.scss";
 
 interface IProps {
   limit: number;
-  offset: number;
   totalCount: number;
-  updateParams: (offset: number, limit: number) => void;
+  currentPage: number;
+  setPage: (page: number) => void;
 }
 
 const Pagination: FC<IProps> = ({
   limit,
-  offset,
+  setPage,
   totalCount,
-  updateParams,
+  currentPage,
 }) => {
-  const currentPage = offset / limit + 1;
   const lastPage = Math.ceil(totalCount / limit);
 
   const buttonNames = getPaginationButtonNames({
@@ -27,20 +26,12 @@ const Pagination: FC<IProps> = ({
     currentPage,
   });
 
-  const setPage = (page: number) => {
-    updateParams((page - 1) * limit, limit);
-  };
-
   const handlePrevPageClick = () => {
-    if (offset - limit >= 0) {
-      updateParams(offset - limit, limit);
-    }
+    setPage(currentPage - 1);
   };
 
   const handleNextPageClick = () => {
-    if (offset + limit <= totalCount) {
-      updateParams(offset + limit, limit);
-    }
+    setPage(currentPage + 1);
   };
 
   return (

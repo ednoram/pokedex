@@ -1,6 +1,7 @@
 import { IPokemon } from "types/index";
 import { AnyAction } from "redux";
 
+export const SET_PAGE = "SET_PAGE";
 export const SET_PAGINATION = "SET_PAGINATION";
 export const FETCH_POKEMONS_START = "FETCH_POKEMONS_START";
 export const FETCH_POKEMONS_ERROR = "FETCH_POKEMONS_ERROR";
@@ -31,8 +32,8 @@ const pokemonsReducer = (
     case FETCH_POKEMONS_SUCCESS:
       return { ...state, pokemons: payload.pokemons };
 
-    case SET_PAGINATION:
-      return { ...state, limit: payload.limit, offset: payload.offset };
+    case SET_PAGE:
+      return { ...state, offset: (payload.page - 1) * state.limit };
 
     default:
       return state;
