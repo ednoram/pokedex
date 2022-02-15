@@ -1,1 +1,1 @@
-export { fetchPokemons } from "./pokemons";
+export * as pokemonActions from "./pokemons";

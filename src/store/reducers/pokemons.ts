@@ -1,37 +1,38 @@
 import { IPokemon } from "types/index";
+import { AnyAction } from "redux";
 
-export const FETCH_POKEMONS_STARTED = "FETCH_POKEMONS_STARTED";
-export const FETCH_POKEMONS_FINISHED = "FETCH_POKEMONS_FINISHED";
-
-interface IPokemonsAction {
-  type: string;
-  payload: {
-    pokemons: IPokemon[];
-  };
-}
+export const SET_PAGINATION = "SET_PAGINATION";
+export const FETCH_POKEMONS_START = "FETCH_POKEMONS_START";
+export const FETCH_POKEMONS_ERROR = "FETCH_POKEMONS_ERROR";
+export const FETCH_POKEMONS_SUCCESS = "FETCH_POKEMONS_SUCCESS";
 
 export interface IPokemonsState {
   count: number;
-  loading: boolean;
+  limit: number;
+  offset: number;
   pokemons: IPokemon[];
 }
 
 const INITIAL_STATE: IPokemonsState = {
+  limit: 20,
+  offset: 0,
   count: 898,
   pokemons: [],
-  loading: false,
 };
 
 const pokemonsReducer = (
   state = INITIAL_STATE,
-  { type, payload }: IPokemonsAction
+  { type, payload }: AnyAction
 ) => {
   switch (type) {
-    case FETCH_POKEMONS_STARTED:
-      return { ...state, loading: true, pokemons: [] };
+    case FETCH_POKEMONS_START:
+      return { ...state, pokemons: [] };
 
-    case FETCH_POKEMONS_FINISHED:
-      return { ...state, loading: false, pokemons: payload.pokemons };
+    case FETCH_POKEMONS_SUCCESS:
+      return { ...state, pokemons: payload.pokemons };
+
+    case SET_PAGINATION:
+      return { ...state, limit: payload.limit, offset: payload.offset };
 
     default:
       return state;

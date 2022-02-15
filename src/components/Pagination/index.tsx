@@ -22,9 +22,9 @@ const Pagination: FC<IProps> = ({
   const lastPage = Math.ceil(totalCount / limit);
 
   const buttonNames = getPaginationButtonNames({
+    limit,
     totalCount,
     currentPage,
-    limit,
   });
 
   const setPage = (page: number) => {

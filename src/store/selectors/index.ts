@@ -1,1 +1,1 @@
-export { selectPokemonsData } from "./pokemons";
+export * as pokemonSelectors from "./pokemons";

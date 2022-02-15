@@ -5,33 +5,38 @@ import { IPokemon } from "types/index";
 import { createAction } from "utils/index";
 
 import {
-  FETCH_POKEMONS_STARTED,
-  FETCH_POKEMONS_FINISHED,
+  SET_PAGINATION,
+  FETCH_POKEMONS_START,
+  FETCH_POKEMONS_ERROR,
+  FETCH_POKEMONS_SUCCESS,
 } from "store/reducers/pokemons";
 
-const fetchPokemonsStarted = () => createAction(FETCH_POKEMONS_STARTED, {});
+const fetchPokemonsStarted = () => createAction(FETCH_POKEMONS_START, {});
 
-const fetchPokemonsFinished = (data: IPokemon[]) =>
-  createAction(FETCH_POKEMONS_FINISHED, { pokemons: data });
+const fetchPokemonsError = () => createAction(FETCH_POKEMONS_ERROR, {});
 
-export const fetchPokemons =
-  (offset: number, limit: number) => async (dispatch: Dispatch) => {
-    try {
-      dispatch(fetchPokemonsStarted());
+const fetchPokemonsSuccess = (data: IPokemon[]) =>
+  createAction(FETCH_POKEMONS_SUCCESS, { pokemons: data });
 
-      const { data } = await API.get("pokemon", { params: { offset, limit } });
+export const setPagination = ({
+  limit,
+  offset,
+}: {
+  limit: number;
+  offset: number;
+}) => createAction(SET_PAGINATION, { offset, limit });
 
-      // There are Pokémon in the api with ids > 10000 that we don't need
-      const filteredResults: IPokemon[] = data?.results
-        ? data.results.filter(({ url }: IPokemon) => {
-            const splitUrl = url.split("/");
-            const pokemonId = splitUrl[splitUrl.length - 2];
-            return pokemonId.length < 4;
-          })
-        : [];
+export const fetchPokemons = () => async (dispatch: Dispatch) => {
+  try {
+    dispatch(fetchPokemonsStarted());
 
-      dispatch(fetchPokemonsFinished(filteredResults));
-    } catch {
-      alert("Something went wrong.");
-    }
-  };
+    const { data } = await API.get("pokemon", {
+      params: { offset: 0, limit: 898 },
+    });
+
+    dispatch(fetchPokemonsSuccess(data.results));
+  } catch {
+    dispatch(fetchPokemonsError());
+    alert("Something went wrong.");
+  }
+};
