@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import useSWR from "swr";
 import axios from "axios";
 import Image from "next/image";
@@ -20,7 +20,7 @@ interface IProps {
 
 const fetch = (url: string) => axios.get(url).then((res) => res.data);
 
-const PokemonCard: FC<IProps> = ({ url }) => {
+const PokemonCard: React.FC<IProps> = ({ url }) => {
   const { data, error } = useSWR(url, fetch, { errorRetryCount: 1 });
 
   const pokemonIdString = data ? "#" + getPokemonIdString(data.id) : "";

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IPokemon } from "types/index";
@@ -8,7 +8,7 @@ import { Pagination, PokemonCard } from "components/index";
 
 import styles from "./Home.module.scss";
 
-const HomeContainer: FC = () => {
+const HomeContainer: React.FC = () => {
   const visiblePokemons = useSelector(pokemonSelectors.selectVisiblePokemons);
   const { count, limit, offset } = useSelector(
     pokemonSelectors.selectPokemonsData

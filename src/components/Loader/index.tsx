@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 
 import utilStyles from "styles/utils.module.scss";
 
@@ -8,7 +8,7 @@ interface IProps {
   loadingMore?: boolean;
 }
 
-const Loader: FC<IProps> = ({ loadingMore }) => {
+const Loader: React.FC<IProps> = ({ loadingMore }) => {
   return (
     <div
       className={[
@@ -18,10 +18,10 @@ const Loader: FC<IProps> = ({ loadingMore }) => {
       ].join(" ")}
     >
       <div className={styles.container__lds_ellipsis}>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div />
+        <div />
+        <div />
+        <div />
       </div>
     </div>
   );

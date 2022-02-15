@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import classNames from "classnames";
 
 import { getPaginationButtonNames } from "utils/index";
@@ -12,7 +12,7 @@ interface IProps {
   setPage: (page: number) => void;
 }
 
-const Pagination: FC<IProps> = ({
+const Pagination: React.FC<IProps> = ({
   limit,
   setPage,
   totalCount,
