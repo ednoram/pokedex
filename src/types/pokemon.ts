@@ -1,6 +1,17 @@
-interface IPokemon {
+export interface IPokemon {
   url: string;
   name: string;
 }
 
-export default IPokemon;
+export interface IPokemonData {
+  name: string;
+  types: IPokemonType[];
+}
+
+export interface IPokemonType {
+  slot: number;
+  type: {
+    url: string;
+    name: string;
+  };
+}

@@ -22,6 +22,7 @@
       "store/*": ["src/store/*"],
       "styles/*": ["src/styles/*"],
       "layouts/*": ["src/layouts/*"],
+      "requests/*": ["src/requests/*"],
       "constants/*": ["src/constants/*"],
       "components/*": ["src/components/*"],
       "containers/*": ["src/containers/*"],

@@ -1,6 +1,5 @@
 import { Dispatch } from "redux";
 
-import { API } from "constants/index";
 import { IPokemon } from "types/index";
 import { createAction } from "utils/index";
 
@@ -10,6 +9,7 @@ import {
   FETCH_POKEMONS_ERROR,
   FETCH_POKEMONS_SUCCESS,
 } from "store/reducers/pokemons";
+import { getAllPokemons } from "~/src/requests";
 
 const fetchPokemonsStarted = () => createAction(FETCH_POKEMONS_START, {});
 
@@ -24,11 +24,9 @@ export const fetchPokemons = () => async (dispatch: Dispatch) => {
   try {
     dispatch(fetchPokemonsStarted());
 
-    const { data } = await API.get("pokemon", {
-      params: { offset: 0, limit: 898 },
-    });
+    const allPokemonsData = await getAllPokemons();
 
-    dispatch(fetchPokemonsSuccess(data.results));
+    dispatch(fetchPokemonsSuccess(allPokemonsData));
   } catch {
     dispatch(fetchPokemonsError());
     alert("Something went wrong.");

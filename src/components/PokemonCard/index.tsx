@@ -1,6 +1,7 @@
 import React from "react";
 import useSWR from "swr";
 import axios from "axios";
+import Link from "next/link";
 import Image from "next/image";
 import classNames from "classnames";
 
@@ -8,6 +9,7 @@ import {
   processPokemonName,
   getPokemonIdString,
   getPokemonAvatarSrc,
+  getPokemonTypesText,
 } from "utils/index";
 import { Loader } from "components/index";
 import utilStyles from "styles/utils.module.scss";
@@ -18,17 +20,13 @@ interface IProps {
   url: string;
 }
 
-const fetch = (url: string) => axios.get(url).then((res) => res.data);
+const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const PokemonCard: React.FC<IProps> = ({ url }) => {
-  const { data, error } = useSWR(url, fetch, { errorRetryCount: 1 });
+  const { data, error } = useSWR(url, fetcher, { errorRetryCount: 1 });
 
   const pokemonIdString = data ? "#" + getPokemonIdString(data.id) : "";
-  const pokemonTypes = data?.types
-    ? data.types
-        ?.map(({ type }: { type: { name: string } }) => type.name)
-        .join(", ")
-    : [];
+  const pokemonTypes = getPokemonTypesText(data?.types);
 
   return (
     <div
@@ -38,15 +36,17 @@ const PokemonCard: React.FC<IProps> = ({ url }) => {
     >
       {data ? (
         <>
-          <div className={styles.content__avatar}>
-            <Image
-              width={150}
-              height={150}
-              alt="pokemon avatar"
-              src={getPokemonAvatarSrc(data.id)}
-              className={styles.container__avatar__image}
-            />
-          </div>
+          <Link href={`/pokemon/${data.name}`}>
+            <div className={styles.content__avatar}>
+              <Image
+                width={150}
+                height={150}
+                alt="pokemon avatar"
+                src={getPokemonAvatarSrc(data.id)}
+                className={styles.container__avatar__image}
+              />
+            </div>
+          </Link>
           <div>
             <p className={styles.content__name}>
               {processPokemonName(data.name)}
