@@ -1,18 +1,12 @@
-import { useEffect } from "react";
-import type { NextPage } from "next";
-import { useDispatch } from "react-redux";
+import type { NextPage, GetStaticProps } from "next";
 
+import { wrapper } from "store/index";
 import { HelmetLayout } from "layouts/index";
+import { getAllPokemons } from "requests/index";
 import { pokemonActions } from "actions/index";
 import { HomeContainer } from "containers/index";
 
 const Home: NextPage = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(pokemonActions.fetchPokemons());
-  }, []);
-
   return (
     <HelmetLayout
       title="Pokédex"
@@ -22,5 +16,19 @@ const Home: NextPage = () => {
     </HelmetLayout>
   );
 };
+
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  (store) => async () => {
+    try {
+      const allPokemons = await getAllPokemons();
+
+      store.dispatch(pokemonActions.setPokemons(allPokemons));
+
+      return { props: {} };
+    } catch {
+      return { notFound: true };
+    }
+  }
+);
 
 export default Home;

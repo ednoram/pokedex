@@ -1,11 +1,10 @@
 import { IPokemon } from "types/index";
 import { AnyAction } from "redux";
 
+import { HYDRATE } from "constants/index";
+
 export const SET_PAGE = "SET_PAGE";
-export const SET_PAGINATION = "SET_PAGINATION";
-export const FETCH_POKEMONS_START = "FETCH_POKEMONS_START";
-export const FETCH_POKEMONS_ERROR = "FETCH_POKEMONS_ERROR";
-export const FETCH_POKEMONS_SUCCESS = "FETCH_POKEMONS_SUCCESS";
+export const SET_POKEMONS = "SET_POKEMONS";
 
 export interface IPokemonsState {
   count: number;
@@ -26,17 +25,21 @@ const pokemonsReducer = (
   { type, payload }: AnyAction
 ) => {
   switch (type) {
-    case FETCH_POKEMONS_START:
-      return { ...state, pokemons: [] };
+    case HYDRATE: {
+      return payload.pokemons;
+    }
 
-    case FETCH_POKEMONS_SUCCESS:
+    case SET_POKEMONS: {
       return { ...state, pokemons: payload.pokemons };
+    }
 
-    case SET_PAGE:
+    case SET_PAGE: {
       return { ...state, offset: (payload.page - 1) * state.limit };
+    }
 
-    default:
+    default: {
       return state;
+    }
   }
 };
 

@@ -1,6 +1,7 @@
 import type { NextPage, GetStaticProps } from "next";
 
 import { HelmetLayout } from "layouts/index";
+import { processPokemonName } from "utils/index";
 import { IPokemon, IPokemonData } from "types/index";
 import { PokemonPageContainer } from "containers/index";
 import { getPokemonData, getAllPokemons } from "requests/index";
@@ -10,8 +11,13 @@ interface IProps {
 }
 
 const PokemonPage: NextPage<IProps> = ({ pokemonData }) => {
+  const processedName = processPokemonName(pokemonData.name);
+
   return (
-    <HelmetLayout title={pokemonData.name} metaDescription="Pokémon Page">
+    <HelmetLayout
+      metaDescription="Pokémon Page"
+      title={`${processedName} | Pokédex`}
+    >
       <PokemonPageContainer pokemonData={pokemonData} />
     </HelmetLayout>
   );
@@ -31,11 +37,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const pokemonData = await getPokemonData(String(params?.name));
 
-    return {
-      props: {
-        pokemonData,
-      },
-    };
+    return { props: { pokemonData } };
   } catch {
     return { notFound: true };
   }
