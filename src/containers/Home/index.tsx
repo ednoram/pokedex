@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { IPokemon } from "types/index";
+import { INameURL } from "types/index";
 import { pokemonActions } from "actions/index";
 import { pokemonSelectors } from "selectors/index";
 import { Pagination, PokemonCard } from "components/index";
@@ -27,7 +27,7 @@ const HomeContainer: React.FC = () => {
 
   const pokemonCards = useMemo(
     () =>
-      visiblePokemons.map(({ url, name }: IPokemon) => (
+      visiblePokemons.map(({ url, name }: INameURL) => (
         <li key={name}>
           <PokemonCard url={url} />
         </li>

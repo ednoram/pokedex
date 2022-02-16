@@ -1,16 +1,17 @@
 import type { NextPage, GetStaticProps } from "next";
 
 import { HelmetLayout } from "layouts/index";
-import { processPokemonName } from "utils/index";
-import { IPokemon, IPokemonData } from "types/index";
+import { processPokemonName, API } from "utils/index";
 import { PokemonPageContainer } from "containers/index";
 import { getPokemonData, getAllPokemons } from "requests/index";
+import { INameURL, IPokemonData, IPokemonSpecies } from "types/index";
 
 interface IProps {
   pokemonData: IPokemonData;
+  pokemonSpecies: IPokemonSpecies;
 }
 
-const PokemonPage: NextPage<IProps> = ({ pokemonData }) => {
+const PokemonPage: NextPage<IProps> = ({ pokemonData, pokemonSpecies }) => {
   const processedName = processPokemonName(pokemonData.name);
 
   return (
@@ -18,7 +19,10 @@ const PokemonPage: NextPage<IProps> = ({ pokemonData }) => {
       metaDescription="Pokémon Page"
       title={`${processedName} | Pokédex`}
     >
-      <PokemonPageContainer pokemonData={pokemonData} />
+      <PokemonPageContainer
+        pokemonData={pokemonData}
+        pokemonSpecies={pokemonSpecies}
+      />
     </HelmetLayout>
   );
 };
@@ -26,7 +30,7 @@ const PokemonPage: NextPage<IProps> = ({ pokemonData }) => {
 export const getStaticPaths = async () => {
   const allPokemons = await getAllPokemons();
 
-  const paths = allPokemons.map((pokemon: IPokemon) => ({
+  const paths = allPokemons.map((pokemon: INameURL) => ({
     params: { name: pokemon.name },
   }));
 
@@ -36,8 +40,14 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const pokemonData = await getPokemonData(String(params?.name));
+    const { data: pokemonSpecies } = await API.get(pokemonData.species.url);
 
-    return { props: { pokemonData } };
+    return {
+      props: {
+        pokemonData,
+        pokemonSpecies,
+      },
+    };
   } catch {
     return { notFound: true };
   }

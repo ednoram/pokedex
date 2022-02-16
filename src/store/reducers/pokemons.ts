@@ -1,4 +1,4 @@
-import { IPokemon } from "types/index";
+import { INameURL } from "types/index";
 import { AnyAction } from "redux";
 
 import { HYDRATE } from "constants/index";
@@ -10,7 +10,7 @@ export interface IPokemonsState {
   count: number;
   limit: number;
   offset: number;
-  pokemons: IPokemon[];
+  pokemons: INameURL[];
 }
 
 const INITIAL_STATE: IPokemonsState = {

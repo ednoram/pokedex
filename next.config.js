@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -12,7 +13,7 @@ const nextConfig = {
   },
   sassOptions: {
     prependData:
-      ["variables", "animations"]
+      ["variables", "animations", "mixins"]
         .map((fileName) => `@import "styles/${fileName}.scss";`)
         .join("\n") + "\n\n",
   },
