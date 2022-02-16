@@ -6,7 +6,7 @@ const getPaginationButtonNames = ({
   limit: number;
   totalCount: number;
   currentPage: number;
-}) => {
+}): number[] => {
   const allButtonNames = Array.from(
     { length: totalCount / limit + 1 },
     (_, i) => i + 1

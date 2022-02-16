@@ -1,5 +1,7 @@
-const getPokemonIdString = (id: number) => {
-  return String(id).length < 3 ? ("00" + id).slice(-3) : String(id);
+const getPokemonIdString = (id: number): string => {
+  const stringId = String(id);
+
+  return stringId.length < 3 ? ("00" + stringId).slice(-3) : stringId;
 };
 
 export default getPokemonIdString;

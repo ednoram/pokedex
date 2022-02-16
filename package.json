@@ -5,13 +5,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint src/**/*.ts src/**/*.tsx pages/**/*.tsx"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "axios": "^0.25.0",
     "classnames": "^2.3.1",
-    "next": "^10.0.1",
+    "next": "^12.0.10",
     "next-redux-wrapper": "^7.0.5",
     "nprogress": "^0.2.0",
     "react": "17.0.2",
@@ -31,6 +31,7 @@
     "eslint": "8.7.0",
     "eslint-config-next": "^0.2.4",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "prettier": "^2.5.1",
