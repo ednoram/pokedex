@@ -1,4 +1,7 @@
+import { compact } from "lodash";
+
 import { API } from "utils/index";
+import { INameURL, PokemonGenderEnum } from "types/index";
 
 export const getAllPokemons = async () => {
   const { data } = await API.get("pokemon", {
@@ -14,8 +17,21 @@ export const getPokemonData = async (name: string) => {
   return data;
 };
 
-export const getPokemonSpecies = async (id: number) => {
-  const { data } = await API.get(`pokemon-species/${id}/`);
+export const getPokemonGenders = async (
+  name: string
+): Promise<(PokemonGenderEnum.MALE | PokemonGenderEnum.FEMALE)[]> => {
+  const { data: femaleData } = await API.get(`gender/1`);
+  const { data: maleData } = await API.get(`gender/2`);
 
-  return data;
+  const getItemName = (item: { pokemon_species: INameURL }) =>
+    item.pokemon_species.name;
+
+  const malePokemonNames = maleData.pokemon_species_details.map(getItemName);
+  const femalePokemonNames =
+    femaleData.pokemon_species_details.map(getItemName);
+
+  return compact([
+    malePokemonNames.includes(name) ? PokemonGenderEnum.MALE : null,
+    femalePokemonNames.includes(name) ? PokemonGenderEnum.FEMALE : null,
+  ]);
 };

@@ -12,13 +12,16 @@ import { Loader } from "components/index";
 import { IPokemonData, IPokemonSpecies } from "types/index";
 
 import styles from "./PokemonPage.module.scss";
+import PokemonInfoGrid from "./PokemonInfoGrid/index";
 
 interface IProps {
+  genders: string[];
   pokemonData: IPokemonData;
   pokemonSpecies: IPokemonSpecies;
 }
 
 const PokemonPageContainer: React.FC<IProps> = ({
+  genders,
   pokemonData,
   pokemonSpecies,
 }) => {
@@ -62,6 +65,11 @@ const PokemonPageContainer: React.FC<IProps> = ({
         </div>
         <div>
           <p className={styles.container__content__flavor_text}>{flavorText}</p>
+          <PokemonInfoGrid
+            genders={genders}
+            pokemonData={pokemonData}
+            pokemonSpecies={pokemonSpecies}
+          />
         </div>
       </div>
     </div>

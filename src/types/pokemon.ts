@@ -3,19 +3,25 @@ export interface INameURL {
   name: string;
 }
 
+interface IAbilityItem {
+  slot: number;
+  ability: INameURL;
+  is_hidden: boolean;
+}
+
+export interface IPokemonTypeItem {
+  slot: number;
+  type: INameURL;
+}
+
 export interface IPokemonData {
   id: number;
   name: string;
-  types: IPokemonType[];
-  species: {
-    url: string;
-    name: string;
-  };
-}
-
-export interface IPokemonType {
-  slot: number;
-  type: INameURL;
+  height: number;
+  weight: number;
+  species: INameURL;
+  types: IPokemonTypeItem[];
+  abilities: IAbilityItem[];
 }
 
 interface IFlavorTextEntry {
@@ -24,6 +30,17 @@ interface IFlavorTextEntry {
   language: INameURL;
 }
 
+interface IGeneraItem {
+  genus: string;
+  language: INameURL;
+}
+
 export interface IPokemonSpecies {
   flavor_text_entries: IFlavorTextEntry[];
+  genera: IGeneraItem[];
+}
+
+export enum PokemonGenderEnum {
+  MALE = "male",
+  FEMALE = "female",
 }

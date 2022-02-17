@@ -1,0 +1,17 @@
+.content {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 32px;
+
+  &__item {
+    text-align: center;
+    font-weight: 500;
+
+    &__heading {
+      font-size: 1.25rem;
+      color: $primaryColor;
+      margin-bottom: 4px;
+    }
+  }
+}

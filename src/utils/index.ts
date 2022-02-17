@@ -1,4 +1,5 @@
 export { default as API } from "./api";
+export { kgToLbs, metersToFt } from "./converters";
 export { default as createAction } from "./createAction";
 export { default as getPokemonIdString } from "./getPokemonIdString";
 export { default as processPokemonName } from "./processPokemonName";
