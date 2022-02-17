@@ -1,6 +1,6 @@
-import { IPokemonType } from "types/index";
+import { IPokemonTypeItem } from "types/index";
 
-const getPokemonTypesText = (types: IPokemonType[] | undefined): string =>
+const getPokemonTypesText = (types: IPokemonTypeItem[] | undefined): string =>
   types ? types.map(({ type }) => type.name).join(", ") : "";
 
 export default getPokemonTypesText;

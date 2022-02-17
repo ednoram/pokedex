@@ -1,0 +1,38 @@
+.content {
+  margin-top: 32px;
+
+  &__heading {
+    color: $primaryColor;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 16px 36px;
+    padding: 18px 20px;
+    margin-top: 10px;
+
+    &__bar {
+      position: relative;
+      display: grid;
+      grid-template-rows: repeat(15, 1fr);
+      gap: 4px;
+      height: 180px;
+
+      &__block {
+        width: 100%;
+        background-color: $lightGray;
+
+        &_filled {
+          background-color: $primaryColor;
+        }
+      }
+    }
+
+    &__name {
+      text-align: center;
+      text-transform: capitalize;
+      margin-top: 6px;
+    }
+  }
+}

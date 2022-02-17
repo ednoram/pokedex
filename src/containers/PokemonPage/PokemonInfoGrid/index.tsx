@@ -57,7 +57,7 @@ const PokemonInfoGrid: React.FC<IProps> = ({
       <div className={styles.content__item}>
         <p className={styles.content__item__heading}>Weight</p>
         <p>
-          {weightKg}kg ({weightLbs})
+          {weightKg}kg ({weightLbs}lbs)
         </p>
       </div>
       <div className={styles.content__item}>
@@ -66,11 +66,11 @@ const PokemonInfoGrid: React.FC<IProps> = ({
       </div>
       <div className={styles.content__item}>
         <p className={styles.content__item__heading}>Types</p>
-        <p>{types}</p>
+        {types}
       </div>
       <div className={styles.content__item}>
         <p className={styles.content__item__heading}>Abilities</p>
-        <p>{abilities}</p>
+        {abilities}
       </div>
       <div className={styles.content__item}>
         <p className={styles.content__item__heading}>Genders</p>

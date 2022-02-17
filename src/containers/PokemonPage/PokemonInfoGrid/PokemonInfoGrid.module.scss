@@ -1,8 +1,9 @@
 .content {
   display: grid;
-  gap: 20px;
+  gap: 24px;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 32px;
+  padding: 16px 20px;
+  margin-top: 12px;
 
   &__item {
     text-align: center;

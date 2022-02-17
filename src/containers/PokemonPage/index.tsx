@@ -12,6 +12,7 @@ import { Loader } from "components/index";
 import { IPokemonData, IPokemonSpecies } from "types/index";
 
 import styles from "./PokemonPage.module.scss";
+import PokemonStats from "./PokemonStats/index";
 import PokemonInfoGrid from "./PokemonInfoGrid/index";
 
 interface IProps {
@@ -45,7 +46,7 @@ const PokemonPageContainer: React.FC<IProps> = ({
   return (
     <div className={styles.container}>
       <Link href="/">
-        <a className={styles.container__back}>{`<`} Pokédex</a>
+        <a className={styles.container__back}>← Explore more Pokémon</a>
       </Link>
       <h1 className={styles.container__title}>
         {processedName} #{idString}
@@ -70,6 +71,7 @@ const PokemonPageContainer: React.FC<IProps> = ({
             pokemonData={pokemonData}
             pokemonSpecies={pokemonSpecies}
           />
+          <PokemonStats pokemonStats={pokemonData.stats} />
         </div>
       </div>
     </div>

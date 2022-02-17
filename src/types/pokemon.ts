@@ -1,3 +1,16 @@
+export enum PokemonGenderEnum {
+  MALE = "male",
+  FEMALE = "female",
+}
+
+export type PokemonStatName =
+  | "hp"
+  | "speed"
+  | "attack"
+  | "defense"
+  | "special-attack"
+  | "special-defense";
+
 export interface INameURL {
   url: string;
   name: string;
@@ -14,12 +27,22 @@ export interface IPokemonTypeItem {
   type: INameURL;
 }
 
+export interface IPokemonStat {
+  base_stat: number;
+  effort: 1;
+  stat: {
+    url: string;
+    name: PokemonStatName;
+  };
+}
+
 export interface IPokemonData {
   id: number;
   name: string;
   height: number;
   weight: number;
   species: INameURL;
+  stats: IPokemonStat[];
   types: IPokemonTypeItem[];
   abilities: IAbilityItem[];
 }
@@ -38,9 +61,4 @@ interface IGeneraItem {
 export interface IPokemonSpecies {
   flavor_text_entries: IFlavorTextEntry[];
   genera: IGeneraItem[];
-}
-
-export enum PokemonGenderEnum {
-  MALE = "male",
-  FEMALE = "female",
 }
