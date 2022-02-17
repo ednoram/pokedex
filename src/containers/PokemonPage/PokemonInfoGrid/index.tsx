@@ -46,8 +46,6 @@ const PokemonInfoGrid: React.FC<IProps> = ({
     [pokemonData]
   );
 
-  const gendersText = genders.map((item) => <p key={item}>{item}</p>);
-
   return (
     <div className={styles.content}>
       <div className={styles.content__item}>
@@ -76,7 +74,11 @@ const PokemonInfoGrid: React.FC<IProps> = ({
       </div>
       <div className={styles.content__item}>
         <p className={styles.content__item__heading}>Genders</p>
-        {gendersText}
+        {genders.length ? (
+          genders.map((item) => <p key={item}>{item}</p>)
+        ) : (
+          <p>None</p>
+        )}
       </div>
     </div>
   );
