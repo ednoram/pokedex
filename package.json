@@ -5,7 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src/**/*.ts src/**/*.tsx pages/**/*.tsx"
+    "lint": "eslint src pages --ext .ts,.tsx --max-warnings=0 --ignore-pattern node_modules/"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
