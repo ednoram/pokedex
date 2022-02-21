@@ -10,7 +10,7 @@ const getPokemonFlavorText = (pokemonSpecies: IPokemonSpecies): string => {
         .replace("\f", " ")
         .split("POKéMON")
         .join("Pokémon")
-    : "Flavor Text Not Found";
+    : "";
 };
 
 export default getPokemonFlavorText;

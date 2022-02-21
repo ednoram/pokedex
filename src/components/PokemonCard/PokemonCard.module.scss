@@ -8,6 +8,10 @@
     animation-duration: 0.3s;
   }
 
+  &_centered {
+    @include flex-center;
+  }
+
   &__avatar {
     display: flex;
     align-items: center;

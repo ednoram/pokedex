@@ -1,6 +1,5 @@
 import React from "react";
-
-import utilStyles from "styles/utils.module.scss";
+import classNames from "classnames";
 
 import styles from "./Loader.module.scss";
 
@@ -9,14 +8,12 @@ interface IProps {
 }
 
 const Loader: React.FC<IProps> = ({ loadingMore }) => {
+  const containerClassNames = classNames(styles.container, {
+    [styles.container_loading_more]: loadingMore,
+  });
+
   return (
-    <div
-      className={[
-        styles.container,
-        utilStyles.flex_center,
-        loadingMore ? styles.container_loading_more : "",
-      ].join(" ")}
-    >
+    <div className={containerClassNames}>
       <div className={styles.container__lds_ellipsis}>
         <div />
         <div />

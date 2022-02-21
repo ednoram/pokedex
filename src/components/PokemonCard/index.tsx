@@ -12,7 +12,6 @@ import {
   getPokemonTypesText,
 } from "utils/index";
 import { Loader } from "components/index";
-import utilStyles from "styles/utils.module.scss";
 
 import styles from "./PokemonCard.module.scss";
 
@@ -28,12 +27,12 @@ const PokemonCard: React.FC<IProps> = ({ url }) => {
   const pokemonIdString = data ? "#" + getPokemonIdString(data.id) : "";
   const pokemonTypes = getPokemonTypesText(data?.types);
 
+  const containerClassNames = classNames(styles.content, {
+    [styles.content_centered]: error || !data,
+  });
+
   return (
-    <div
-      className={classNames(styles.content, {
-        [utilStyles.flex_center]: error || !data,
-      })}
-    >
+    <div className={containerClassNames}>
       {data ? (
         <>
           <Link href={`/pokemon/${data.name}`}>
