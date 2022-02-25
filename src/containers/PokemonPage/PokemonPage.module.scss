@@ -16,12 +16,11 @@
 
   &__title {
     margin-top: -10px;
-    color: $primaryColor;
     font-size: 3rem;
     text-align: center;
   }
 
-  &__content {
+  &__grid {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 40px;

@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.global-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 0 140px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $primaryColor;
+}

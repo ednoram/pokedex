@@ -1,7 +1,9 @@
-import { IPokemonSpecies } from "types/index";
+import { IFlavorTextEntry } from "types/index";
 
-const getPokemonFlavorText = (pokemonSpecies: IPokemonSpecies): string => {
-  const englishText = pokemonSpecies.flavor_text_entries.find(
+const getPokemonFlavorText = (
+  flavorTextEntries: IFlavorTextEntry[]
+): string => {
+  const englishText = flavorTextEntries.find(
     (item) => item.language.name === "en"
   );
 

@@ -1,18 +1,24 @@
 import type { NextPage, GetStaticProps } from "next";
 
 import {
+  API,
+  processPokemonName,
+  getEvolutionPokemons,
+  getPokemonFlavorText,
+} from "utils/index";
+import {
   getPokemonData,
   getAllPokemons,
   getPokemonGenders,
 } from "requests/index";
 import { HelmetLayout } from "layouts/index";
-import { processPokemonName, API } from "utils/index";
 import { PokemonPageContainer } from "containers/index";
 import { INameURL, IPokemonData, IPokemonSpecies } from "types/index";
 
 interface IProps {
   genders: string[];
   pokemonData: IPokemonData;
+  evolutionPokemons: INameURL[];
   pokemonSpecies: IPokemonSpecies;
 }
 
@@ -20,6 +26,7 @@ const PokemonPage: NextPage<IProps> = ({
   genders,
   pokemonData,
   pokemonSpecies,
+  evolutionPokemons,
 }) => {
   const processedName = processPokemonName(pokemonData.name);
 
@@ -32,6 +39,7 @@ const PokemonPage: NextPage<IProps> = ({
         genders={genders}
         pokemonData={pokemonData}
         pokemonSpecies={pokemonSpecies}
+        evolutionPokemons={evolutionPokemons}
       />
     </HelmetLayout>
   );
@@ -53,13 +61,23 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const { data: pokemonSpecies } = await API.get(pokemonData.species.url);
     const genders = await getPokemonGenders(pokemonData.name);
 
-    const { flavor_text_entries, genera } = pokemonSpecies;
+    const { data: evolutionChain } = await API.get(
+      pokemonSpecies.evolution_chain.url
+    );
+
+    const evolutionPokemons = getEvolutionPokemons(evolutionChain.chain);
+
+    const flavorText = getPokemonFlavorText(pokemonSpecies.flavor_text_entries);
 
     return {
       props: {
         genders,
         pokemonData,
-        pokemonSpecies: { flavor_text_entries, genera },
+        evolutionPokemons,
+        pokemonSpecies: {
+          flavorText,
+          genera: pokemonSpecies.genera,
+        },
       },
     };
   } catch {

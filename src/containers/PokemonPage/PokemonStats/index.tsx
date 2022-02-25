@@ -54,7 +54,7 @@ const PokemonStats: React.FC<IProps> = ({ pokemonStats }) => {
 
   return (
     <div className={styles.content}>
-      <h2 className={styles.content__heading}>Stats</h2>
+      <h2>Stats</h2>
       <div className={styles.content__stats}>{statsSection}</div>
     </div>
   );

@@ -47,7 +47,7 @@ export interface IPokemonData {
   abilities: IAbilityItem[];
 }
 
-interface IFlavorTextEntry {
+export interface IFlavorTextEntry {
   flavor_text: string;
   version: INameURL;
   language: INameURL;
@@ -59,6 +59,12 @@ interface IGeneraItem {
 }
 
 export interface IPokemonSpecies {
-  flavor_text_entries: IFlavorTextEntry[];
+  flavorText: string;
   genera: IGeneraItem[];
+  evolution_chain: { url: string };
+}
+
+export interface IEvolutionChain {
+  species: INameURL;
+  evolves_to: IEvolutionChain[];
 }

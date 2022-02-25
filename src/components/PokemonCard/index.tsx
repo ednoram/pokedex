@@ -1,11 +1,11 @@
 import React from "react";
 import useSWR from "swr";
-import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
 import classNames from "classnames";
 
 import {
+  fetcher,
   processPokemonName,
   getPokemonIdString,
   getPokemonAvatarSrc,
@@ -18,8 +18,6 @@ import styles from "./PokemonCard.module.scss";
 interface IProps {
   url: string;
 }
-
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const PokemonCard: React.FC<IProps> = ({ url }) => {
   const { data, error } = useSWR(url, fetcher, { errorRetryCount: 1 });

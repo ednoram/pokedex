@@ -37,10 +37,9 @@ const PokemonInfoGrid: React.FC<IProps> = ({
 
   const abilities = useMemo(
     () =>
-      pokemonData.abilities.reduce((acc, item) => {
-        const node = !item.is_hidden && (
-          <p key={item.ability.name}>{item.ability.name}</p>
-        );
+      pokemonData.abilities.reduce((acc, { ability, is_hidden }) => {
+        const node = !is_hidden && <p key={ability.name}>{ability.name}</p>;
+
         return [...acc, node];
       }, [] as React.ReactNode[]),
     [pokemonData]

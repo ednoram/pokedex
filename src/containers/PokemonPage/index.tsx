@@ -6,18 +6,19 @@ import {
   getPokemonIdString,
   processPokemonName,
   getPokemonAvatarSrc,
-  getPokemonFlavorText,
 } from "utils/index";
 import { Loader } from "components/index";
-import { IPokemonData, IPokemonSpecies } from "types/index";
+import { INameURL, IPokemonData, IPokemonSpecies } from "types/index";
 
 import styles from "./PokemonPage.module.scss";
 import PokemonStats from "./PokemonStats/index";
 import PokemonInfoGrid from "./PokemonInfoGrid/index";
+import PokemonEvolutions from "./PokemonEvolutions/index";
 
 interface IProps {
   genders: string[];
   pokemonData: IPokemonData;
+  evolutionPokemons: INameURL[];
   pokemonSpecies: IPokemonSpecies;
 }
 
@@ -25,6 +26,7 @@ const PokemonPageContainer: React.FC<IProps> = ({
   genders,
   pokemonData,
   pokemonSpecies,
+  evolutionPokemons,
 }) => {
   const [loadingImage, setLoadingImage] = useState(true);
 
@@ -39,7 +41,6 @@ const PokemonPageContainer: React.FC<IProps> = ({
   }, []);
 
   const idString = getPokemonIdString(pokemonData.id);
-  const flavorText = getPokemonFlavorText(pokemonSpecies);
   const processedName = processPokemonName(pokemonData.name);
   const avatarImageSrc = getPokemonAvatarSrc(pokemonData.id, { full: true });
 
@@ -51,8 +52,8 @@ const PokemonPageContainer: React.FC<IProps> = ({
       <h1 className={styles.container__title}>
         {processedName} #{idString}
       </h1>
-      <div className={styles.container__content}>
-        <div className={styles.container__content__avatar}>
+      <div className={styles.container__grid}>
+        <div className={styles.container__grid__avatar}>
           {!loadingImage ? (
             <Image
               width={430}
@@ -65,7 +66,9 @@ const PokemonPageContainer: React.FC<IProps> = ({
           )}
         </div>
         <div>
-          <p className={styles.container__content__flavor_text}>{flavorText}</p>
+          <p className={styles.container__grid__flavor_text}>
+            {pokemonSpecies.flavorText}
+          </p>
           <PokemonInfoGrid
             genders={genders}
             pokemonData={pokemonData}
@@ -74,6 +77,7 @@ const PokemonPageContainer: React.FC<IProps> = ({
           <PokemonStats pokemonStats={pokemonData.stats} />
         </div>
       </div>
+      <PokemonEvolutions pokemons={evolutionPokemons} />
     </div>
   );
 };
