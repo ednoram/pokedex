@@ -38,6 +38,7 @@ const Pagination: React.FC<IProps> = ({
     <ul className={styles.content} hidden={totalCount <= limit}>
       <li>
         <button
+          name="previous page"
           disabled={currentPage === 1}
           onClick={handlePrevPageClick}
           className={styles.content__button_prev_next}
@@ -48,6 +49,7 @@ const Pagination: React.FC<IProps> = ({
       {buttonNames.map((name) => (
         <li key={name}>
           <button
+            name={`${name} page`}
             onClick={() => setPage(name)}
             className={classNames(styles.content__button, {
               [styles.content__button_active]: name === currentPage,
@@ -59,6 +61,7 @@ const Pagination: React.FC<IProps> = ({
       ))}
       <li>
         <button
+          name="next page"
           onClick={handleNextPageClick}
           disabled={currentPage === lastPage}
           className={styles.content__button_prev_next}

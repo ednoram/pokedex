@@ -59,6 +59,7 @@ const PokemonPageContainer: React.FC<IProps> = ({
               width={430}
               height={430}
               priority={true}
+              alt="pokemon avatar"
               src={avatarImageSrc}
             />
           ) : (
