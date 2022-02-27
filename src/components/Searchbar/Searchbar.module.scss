@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  max-width: 292px;
+  width: 100%;
+  box-shadow: $box-shadow;
+
+  &__input {
+    width: 100%;
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  &__search_button {
+    @include flex-center;
+    width: 44px;
+    padding: 4px;
+    background-color: $primary-color;
+
+    svg {
+      fill: white;
+      transform: scale(0.75);
+    }
+  }
+}

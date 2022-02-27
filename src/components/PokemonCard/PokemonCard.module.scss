@@ -1,5 +1,5 @@
 .content {
-  box-shadow: $boxShadow;
+  box-shadow: $box-shadow;
   min-height: 271px;
   padding: 12px;
 
@@ -17,8 +17,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    background-color: $lightGray;
-    border-radius: $borderRadius;
+    background-color: $light-gray;
+    border-radius: $border-radius;
     user-select: none;
     cursor: pointer;
     padding: 10px;
@@ -43,7 +43,7 @@
   }
 
   &__types {
-    color: $primaryColor;
+    color: $primary-color;
     margin-top: 2px;
     text-align: center;
   }

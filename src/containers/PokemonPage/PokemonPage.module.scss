@@ -3,8 +3,8 @@
 
   &__back {
     background: transparent;
-    border-radius: $borderRadius;
-    color: $primaryColor;
+    border-radius: $border-radius;
+    color: $primary-color;
     font-size: 1.25rem;
     width: auto;
     font-weight: 500;
@@ -31,8 +31,8 @@
       place-items: center;
       width: 430px;
       height: 430px;
-      background-color: $lightGray;
-      border-radius: $borderRadius;
+      background-color: $light-gray;
+      border-radius: $border-radius;
       padding: 20px;
     }
 

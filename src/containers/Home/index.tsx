@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { INameURL } from "types/index";
 import { pokemonActions } from "actions/index";
 import { pokemonSelectors } from "selectors/index";
-import { Pagination, PokemonCard } from "components/index";
+import { Pagination, PokemonCard, Searchbar } from "components/index";
 
 import styles from "./Home.module.scss";
 
@@ -25,6 +25,10 @@ const HomeContainer: React.FC = () => {
     dispatch(pokemonActions.setPage(page));
   };
 
+  const setSearchValue = (value: string) => {
+    dispatch(pokemonActions.setSearchValue(value));
+  };
+
   const pokemonCards = useMemo(
     () =>
       visiblePokemons.map(({ url, name }: INameURL) => (
@@ -38,7 +42,17 @@ const HomeContainer: React.FC = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.container__title}>Pokédex</h1>
-      <ul className={styles.container__list}>{pokemonCards}</ul>
+      <div className={styles.container__controls}>
+        <Searchbar
+          placeholder="Search by name"
+          setSearchValue={setSearchValue}
+        />
+      </div>
+      {pokemonCards.length ? (
+        <ul className={styles.container__list}>{pokemonCards}</ul>
+      ) : (
+        <p className={styles.container__empty_list}>Nothing was found</p>
+      )}
       <div className={styles.container__pagination}>
         <Pagination
           limit={limit}
