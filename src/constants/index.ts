@@ -1,2 +1,3 @@
+export * from "./paths";
+export * from "./stats";
 export * from "./global";
-export { default as maxStatValues } from "./maxStatValues";

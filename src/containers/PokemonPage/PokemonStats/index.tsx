@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import classNames from "classnames";
 
-import { maxStatValues } from "constants/index";
+import { MAX_STAT_VALUES } from "constants/index";
 import { IPokemonStat, PokemonStatName } from "types/index";
 
 import styles from "./PokemonStats.module.scss";
@@ -16,7 +16,7 @@ const PokemonStats: React.FC<IProps> = ({ pokemonStats }) => {
   const getBlockClassName = useCallback(
     (number: number, statName: PokemonStatName, baseStat: number) => {
       const isLast = number === blockNumbers.length - 1;
-      const maxValue = maxStatValues[statName];
+      const maxValue = MAX_STAT_VALUES[statName];
       const progress = (baseStat / maxValue) * 15;
       const hasPassed = progress >= blockNumbers.length - number;
 

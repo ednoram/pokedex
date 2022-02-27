@@ -11,6 +11,7 @@ import {
   getPokemonAvatarSrc,
   getPokemonTypesText,
 } from "utils/index";
+import { PATHS } from "constants/index";
 import { Loader } from "components/index";
 
 import styles from "./PokemonCard.module.scss";
@@ -33,7 +34,7 @@ const PokemonCard: React.FC<IProps> = ({ url }) => {
     <div className={containerClassNames}>
       {data ? (
         <>
-          <Link href={`/pokemon/${data.name}`}>
+          <Link href={`${PATHS.pokemon}/${data.name}`}>
             <div className={styles.content__avatar}>
               <Image
                 width={150}

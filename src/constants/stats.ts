@@ -1,4 +1,4 @@
-const maxStatValues = {
+export const MAX_STAT_VALUES = {
   hp: 255,
   speed: 200,
   attack: 200,
@@ -6,5 +6,3 @@ const maxStatValues = {
   "special-attack": 200,
   "special-defense": 230,
 };
-
-export default maxStatValues;
