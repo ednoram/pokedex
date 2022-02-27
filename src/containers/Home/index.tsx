@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { INameURL } from "types/index";
@@ -25,9 +25,9 @@ const HomeContainer: React.FC = () => {
     dispatch(pokemonActions.setPage(page));
   };
 
-  const setSearchValue = (value: string) => {
+  const setSearchValue = useCallback((value: string) => {
     dispatch(pokemonActions.setSearchValue(value));
-  };
+  }, []);
 
   const pokemonCards = useMemo(
     () =>

@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, memo, useRef } from "react";
 
 import SearchIcon from "assets/SearchIcon.svg";
 
@@ -10,22 +10,26 @@ interface IProps {
 }
 
 const Searchbar: React.FC<IProps> = ({ placeholder, setSearchValue }) => {
-  const [inputValue, setInputValue] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const searchValue = inputValue.trim().toLowerCase();
-    setSearchValue(searchValue);
+
+    const inputElement = searchInputRef.current;
+
+    if (inputElement) {
+      const searchValue = inputElement.value.trim().toLowerCase();
+      setSearchValue(searchValue);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.container}>
         <input
-          value={inputValue}
+          ref={searchInputRef}
           placeholder={placeholder}
           className={styles.container__input}
-          onChange={(e) => setInputValue(e.target.value)}
         />
         <button name="search" className={styles.container__search_button}>
           <SearchIcon />
@@ -35,4 +39,4 @@ const Searchbar: React.FC<IProps> = ({ placeholder, setSearchValue }) => {
   );
 };
 
-export default Searchbar;
+export default memo(Searchbar);
