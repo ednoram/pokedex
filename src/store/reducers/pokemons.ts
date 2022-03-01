@@ -1,6 +1,6 @@
-import { INameURL } from "types/index";
 import { AnyAction } from "redux";
 
+import { INameURL } from "types/index";
 import { HYDRATE } from "constants/index";
 import { filterPokemons } from "utils/index";
 
