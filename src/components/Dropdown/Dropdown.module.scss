@@ -1,0 +1,46 @@
+.dropdown {
+  min-width: 56px;
+  color: $primary-color;
+  cursor: pointer;
+  font-weight: 500;
+  user-select: none;
+  position: relative;
+
+  &__head {
+    @include flex-space-between;
+    padding: 8px 6px 8px 8px;
+    text-align: center;
+
+    &_active {
+      box-shadow: $box-shadow;
+    }
+
+    &__icon {
+      fill: $primary-color;
+      transform: scale(0.55) rotate(90deg);
+      transition: 0.2s;
+
+      &_active {
+        transform: scale(0.55) rotate(270deg);
+      }
+    }
+  }
+
+  &__options {
+    box-shadow: $box-shadow;
+    position: absolute;
+    width: 100%;
+    z-index: 99;
+    background: white;
+
+    &__item {
+      padding: 8px;
+      text-align: center;
+
+      &:hover {
+        background: $primary-color;
+        color: white;
+      }
+    }
+  }
+}

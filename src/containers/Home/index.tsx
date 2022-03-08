@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { INameURL } from "types/index";
 import { pokemonActions } from "actions/index";
+import { LIMIT_OPTIONS } from "constants/index";
 import { pokemonSelectors } from "selectors/index";
-import { Pagination, PokemonCard, Searchbar } from "components/index";
+import { Pagination, PokemonCard, Searchbar, Dropdown } from "components/index";
 
 import styles from "./Home.module.scss";
 
@@ -15,11 +16,17 @@ const HomeContainer: React.FC = () => {
   );
   const currentPage = useSelector(pokemonSelectors.selectCurrentPage);
 
+  const [limitOption, setLimitOption] = useState<number>(limit);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     window.scroll(0, 0);
   }, [limit, offset]);
+
+  useEffect(() => {
+    dispatch(pokemonActions.setLimit(limitOption));
+  }, [limitOption]);
 
   const setPage = (page: number) => {
     dispatch(pokemonActions.setPage(page));
@@ -46,6 +53,11 @@ const HomeContainer: React.FC = () => {
         <Searchbar
           placeholder="Search by name"
           setSearchValue={setSearchValue}
+        />
+        <Dropdown
+          options={LIMIT_OPTIONS}
+          selectedOption={limitOption}
+          setSelectedOption={setLimitOption}
         />
       </div>
       {pokemonCards.length ? (

@@ -1,10 +1,11 @@
 import { AnyAction } from "redux";
 
 import { INameURL } from "types/index";
-import { HYDRATE } from "constants/index";
 import { filterPokemons } from "utils/index";
+import { HYDRATE, LIMIT_OPTIONS } from "constants/index";
 
 export const SET_PAGE = "SET_PAGE";
+export const SET_LIMIT = "SET_LIMIT";
 export const SET_POKEMONS = "SET_POKEMONS";
 export const SET_SEARCH_VALUE = "SET_SEARCH_VALUE";
 
@@ -18,10 +19,10 @@ export interface IPokemonsState {
 
 const INITIAL_STATE: IPokemonsState = {
   count: 0,
-  limit: 20,
   offset: 0,
   pokemons: [],
   searchValue: "",
+  limit: LIMIT_OPTIONS[1],
 };
 
 const pokemonsReducer = (
@@ -43,6 +44,13 @@ const pokemonsReducer = (
 
     case SET_PAGE: {
       return { ...state, offset: (payload.page - 1) * state.limit };
+    }
+
+    case SET_LIMIT: {
+      const newOffset =
+        Math.floor(state.offset / payload.limit) * payload.limit;
+
+      return { ...state, offset: newOffset, limit: payload.limit };
     }
 
     case SET_SEARCH_VALUE: {

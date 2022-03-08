@@ -8,6 +8,7 @@
   }
 
   &__controls {
+    @include flex-space-between(rowe);
     margin-top: 12px;
   }
 
