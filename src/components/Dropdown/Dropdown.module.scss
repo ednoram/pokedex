@@ -8,7 +8,7 @@
 
   &__head {
     @include flex-space-between;
-    padding: 8px 6px 8px 8px;
+    padding: 8px 6px 8px 12px;
     text-align: center;
 
     &_active {
@@ -34,7 +34,7 @@
     background: white;
 
     &__item {
-      padding: 8px;
+      padding: 8px 12px;
       text-align: center;
 
       &:hover {

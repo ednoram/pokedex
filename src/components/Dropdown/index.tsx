@@ -1,19 +1,26 @@
 import React, { useMemo, useRef, useState } from "react";
-import { nanoid } from "nanoid";
+import { uniq } from "lodash";
 import classNames from "classnames";
 
 import { useOutsideClick } from "hooks/index";
+import { SortOptionsEnum } from "types/index";
 import RightArrow from "assets/RightArrow.svg";
 
 import styles from "./Dropdown.module.scss";
 
+type SetOptionFuncType = (value: string) => void;
+
 interface IProps {
-  options: number[];
-  selectedOption: number;
-  setSelectedOption: React.Dispatch<React.SetStateAction<number>>;
+  options: string[];
+  className?: string;
+  selectedOption: string | SortOptionsEnum;
+  setSelectedOption:
+    | React.Dispatch<React.SetStateAction<string>>
+    | SetOptionFuncType;
 }
 
 const Dropdown: React.FC<IProps> = ({
+  className,
   options,
   setSelectedOption,
   selectedOption,
@@ -41,7 +48,7 @@ const Dropdown: React.FC<IProps> = ({
 
   const optionsList = useMemo(
     () =>
-      options.map((option) => {
+      uniq(options).map((option) => {
         const handleClick = () => {
           setSelectedOption(option);
           setIsOpen(false);
@@ -50,11 +57,11 @@ const Dropdown: React.FC<IProps> = ({
         return (
           <div
             role="button"
-            key={nanoid()}
+            key={option}
             onClick={handleClick}
             className={styles.dropdown__options__item}
           >
-            {option}
+            <p>{option}</p>
           </div>
         );
       }),
@@ -62,7 +69,7 @@ const Dropdown: React.FC<IProps> = ({
   );
 
   return (
-    <div className={styles.dropdown}>
+    <div className={classNames(styles.dropdown, className)}>
       <div
         role="button"
         ref={dropdownRef}

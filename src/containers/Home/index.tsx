@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { INameURL } from "types/index";
 import { pokemonActions } from "actions/index";
-import { LIMIT_OPTIONS } from "constants/index";
 import { pokemonSelectors } from "selectors/index";
+import { LIMIT_OPTIONS, SORT_OPTIONS } from "constants/index";
 import { Pagination, PokemonCard, Searchbar, Dropdown } from "components/index";
 
 import styles from "./Home.module.scss";
@@ -17,6 +17,7 @@ const HomeContainer: React.FC = () => {
   const currentPage = useSelector(pokemonSelectors.selectCurrentPage);
 
   const [limitOption, setLimitOption] = useState<number>(limit);
+  const [sortOption, setSortOption] = useState<string>(SORT_OPTIONS[0]);
 
   const dispatch = useDispatch();
 
@@ -28,8 +29,21 @@ const HomeContainer: React.FC = () => {
     dispatch(pokemonActions.setLimit(limitOption));
   }, [limitOption]);
 
+  useEffect(() => {
+    dispatch(pokemonActions.setSortOption(sortOption));
+  }, [sortOption]);
+
+  const limitStringOptions = useMemo(
+    () => LIMIT_OPTIONS.map((item) => String(item)),
+    []
+  );
+
   const setPage = (page: number) => {
     dispatch(pokemonActions.setPage(page));
+  };
+
+  const setLimitOptionValue = (value: string) => {
+    setLimitOption(Number(value));
   };
 
   const setSearchValue = useCallback((value: string) => {
@@ -50,14 +64,22 @@ const HomeContainer: React.FC = () => {
     <div className={styles.container}>
       <h1 className={styles.container__title}>Pokédex</h1>
       <div className={styles.container__controls}>
-        <Searchbar
-          placeholder="Search by name"
-          setSearchValue={setSearchValue}
-        />
+        <div className={styles.container__controls__left}>
+          <Searchbar
+            placeholder="Search by name"
+            setSearchValue={setSearchValue}
+          />
+          <Dropdown
+            options={SORT_OPTIONS}
+            selectedOption={sortOption}
+            setSelectedOption={setSortOption}
+            className={styles.container__controls__left__dropdown}
+          />
+        </div>
         <Dropdown
-          options={LIMIT_OPTIONS}
-          selectedOption={limitOption}
-          setSelectedOption={setLimitOption}
+          options={limitStringOptions}
+          selectedOption={String(limitOption)}
+          setSelectedOption={setLimitOptionValue}
         />
       </div>
       {pokemonCards.length ? (

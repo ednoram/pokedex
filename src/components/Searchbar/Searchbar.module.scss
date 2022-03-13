@@ -1,12 +1,11 @@
 .container {
   display: flex;
-  max-width: 292px;
-  width: 100%;
+  width: 280px;
   box-shadow: $box-shadow;
 
   &__input {
+    padding: 10px 12px;
     width: 100%;
-    padding: 8px 12px;
   }
 
   &__search_button {

@@ -68,3 +68,10 @@ export interface IEvolutionChain {
   species: INameURL;
   evolves_to: IEvolutionChain[];
 }
+
+export enum SortOptionsEnum {
+  A_Z_SORT = "A-Z",
+  Z_A_SORT = "Z-A",
+  LOWEST_TO_HIGHEST_SORT = "Lowest to highest number",
+  HIGHEST_TO_LOWEST_SORT = "Highest to lowest number",
+}

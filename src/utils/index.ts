@@ -10,4 +10,5 @@ export { default as getPokemonAvatarSrc } from "./getPokemonAvatarSrc";
 export { default as getEvolutionPokemons } from "./getEvolutionPokemons";
 export { default as getPokemonFlavorText } from "./getPokemonFlavorText";
 export { default as getPokemonUrlFromName } from "./getPokemonUrlFromName";
+export { default as getPokemonSortFunction } from "./getPokemonSortFunction";
 export { default as getPaginationButtonNames } from "./getPaginationButtonNames";

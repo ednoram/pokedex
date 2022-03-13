@@ -1,19 +1,22 @@
 import { createSelector } from "reselect";
 
 import { IState } from "types/index";
-import { filterPokemons } from "utils/index";
 import { IPokemonsState } from "reducers/pokemons";
+import { filterPokemons, getPokemonSortFunction } from "utils/index";
 
 export const selectPokemonsData = (state: IState) => state.pokemons;
 
 export const selectVisiblePokemons = createSelector(
   selectPokemonsData,
-  ({ pokemons, offset, limit, searchValue }: IPokemonsState) => {
+  ({ pokemons, offset, limit, searchValue, sortOption }: IPokemonsState) => {
     const filteredPokemons = searchValue
       ? filterPokemons(pokemons, searchValue)
-      : pokemons;
+      : Array.from(pokemons);
 
-    return filteredPokemons.slice(offset, offset + limit);
+    const sortFunc = getPokemonSortFunction(sortOption);
+    const sortedPokemons = filteredPokemons.sort(sortFunc);
+
+    return sortedPokemons.slice(offset, offset + limit);
   }
 );
 

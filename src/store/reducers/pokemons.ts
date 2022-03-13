@@ -1,12 +1,13 @@
 import { AnyAction } from "redux";
 
-import { INameURL } from "types/index";
 import { filterPokemons } from "utils/index";
+import { INameURL, SortOptionsEnum } from "types/index";
 import { HYDRATE, LIMIT_OPTIONS } from "constants/index";
 
 export const SET_PAGE = "SET_PAGE";
 export const SET_LIMIT = "SET_LIMIT";
 export const SET_POKEMONS = "SET_POKEMONS";
+export const SET_SORT_OPTION = "SET_SORT_OPTION";
 export const SET_SEARCH_VALUE = "SET_SEARCH_VALUE";
 
 export interface IPokemonsState {
@@ -15,6 +16,7 @@ export interface IPokemonsState {
   offset: number;
   searchValue: string;
   pokemons: INameURL[];
+  sortOption: SortOptionsEnum;
 }
 
 const INITIAL_STATE: IPokemonsState = {
@@ -23,6 +25,7 @@ const INITIAL_STATE: IPokemonsState = {
   pokemons: [],
   searchValue: "",
   limit: LIMIT_OPTIONS[1],
+  sortOption: SortOptionsEnum.LOWEST_TO_HIGHEST_SORT,
 };
 
 const pokemonsReducer = (
@@ -62,6 +65,10 @@ const pokemonsReducer = (
         searchValue: payload.value,
         count: filteredPokemons.length,
       };
+    }
+
+    case SET_SORT_OPTION: {
+      return { ...state, sortOption: payload.sortOption, offset: 0 };
     }
 
     default: {
