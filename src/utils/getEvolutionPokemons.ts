@@ -1,21 +1,25 @@
+import axios from "axios";
 import { compact } from "lodash";
 
-import { getPokemonUrlFromName } from "utils/index";
 import { IEvolutionChain, INameURL } from "types/index";
 
-const getEvolutionPokemons = (chain: IEvolutionChain): INameURL[] => {
-  const firstName = chain.species.name;
+const getEvolutionPokemons = async (
+  chain: IEvolutionChain
+): Promise<INameURL[]> => {
+  const firstUrl = chain.species.url;
   const firstEvolvesTo = chain.evolves_to[0];
-  const secondName = firstEvolvesTo ? firstEvolvesTo.species.name : "";
+  const secondUrl = firstEvolvesTo ? firstEvolvesTo.species.url : "";
   const secondEvolvesTo = firstEvolvesTo?.evolves_to[0];
-  const thirdName = secondEvolvesTo ? secondEvolvesTo.species.name : "";
+  const thirdUrl = secondEvolvesTo ? secondEvolvesTo.species.url : "";
 
-  const names = compact([firstName, secondName, thirdName]);
+  const speciesUrls = compact([firstUrl, secondUrl, thirdUrl]);
 
-  return names.map((name) => {
-    const url = getPokemonUrlFromName(name);
-    return { name, url };
+  const pokemonsPromises = speciesUrls.map(async (url) => {
+    const { data } = await axios.get(url);
+    return data.varieties[0].pokemon;
   });
+
+  return await Promise.all(pokemonsPromises);
 };
 
 export default getEvolutionPokemons;

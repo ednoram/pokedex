@@ -10,8 +10,8 @@ import {
   getPokemonIdString,
   getPokemonAvatarSrc,
   getPokemonTypesText,
+  getPokemonRoute,
 } from "utils/index";
-import { PATHS } from "constants/index";
 import { Loader } from "components/index";
 
 import styles from "./PokemonCard.module.scss";
@@ -23,18 +23,22 @@ interface IProps {
 const PokemonCard: React.FC<IProps> = ({ url }) => {
   const { data, error } = useSWR(url, fetcher, { errorRetryCount: 1 });
 
-  const pokemonIdString = data ? "#" + getPokemonIdString(data.id) : "";
+  const pokemonIdString = data ? getPokemonIdString(data.id) : "";
   const pokemonTypes = getPokemonTypesText(data?.types);
 
   const containerClassNames = classNames(styles.content, {
     [styles.content_centered]: error || !data,
   });
 
+  const pokemonRoute = data ? getPokemonRoute(data.name) : "";
+
   return (
     <div className={containerClassNames}>
-      {data ? (
-        <>
-          <Link href={`${PATHS.pokemon}/${data.name}`}>
+      {!data && !error ? (
+        <Loader />
+      ) : (
+        <React.Fragment>
+          <Link href={pokemonRoute}>
             <div className={styles.content__avatar}>
               <Image
                 width={150}
@@ -49,12 +53,13 @@ const PokemonCard: React.FC<IProps> = ({ url }) => {
             <p className={styles.content__name}>
               {processPokemonName(data.name)}
             </p>
-            <p className={styles.content__id}>{pokemonIdString}</p>
+            <p className={styles.content__id}>#{pokemonIdString}</p>
             <p className={styles.content__types}>{pokemonTypes}</p>
           </div>
-        </>
-      ) : (
-        <Loader />
+        </React.Fragment>
+      )}
+      {!!error && (
+        <p className={styles.content__error}>Something went wrong!</p>
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import Head from "next/head";
 
 interface Props {
@@ -8,13 +8,13 @@ interface Props {
 
 const HelmetLayout: FC<Props> = ({ children, title, metaDescription }) => {
   return (
-    <>
+    <React.Fragment>
       <Head>
         <title>{title}</title>
         <meta name="description" content={metaDescription} />
       </Head>
       <main>{children}</main>
-    </>
+    </React.Fragment>
   );
 };
 

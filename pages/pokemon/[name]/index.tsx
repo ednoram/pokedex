@@ -49,10 +49,15 @@ export const getStaticPaths = async () => {
   const allPokemons = await getAllPokemons();
 
   const paths = allPokemons.map((pokemon: INameURL) => ({
-    params: { name: pokemon.name },
+    params: {
+      name: pokemon.name,
+    },
   }));
 
-  return { paths, fallback: false };
+  return {
+    paths,
+    fallback: false,
+  };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -65,7 +70,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       pokemonSpecies.evolution_chain.url
     );
 
-    const evolutionPokemons = getEvolutionPokemons(evolutionChain.chain);
+    const evolutionPokemons = await getEvolutionPokemons(evolutionChain.chain);
 
     const flavorText = getPokemonFlavorText(pokemonSpecies.flavor_text_entries);
 
