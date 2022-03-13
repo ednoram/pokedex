@@ -1,16 +1,24 @@
+import {
+  Store,
+  createStore,
+  combineReducers,
+  applyMiddleware,
+} from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 import { createWrapper } from "next-redux-wrapper";
-import { createStore, combineReducers, Store } from "@reduxjs/toolkit";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
 import { IState } from "types/index";
 
-import { pokemonsReducer } from "./reducers";
+import { pokemonsReducer, pokemonTypesReducer } from "./reducers";
 
 const reducers = combineReducers({
   pokemons: pokemonsReducer,
+  pokemonTypes: pokemonTypesReducer,
 });
 
-const middleware = composeWithDevTools();
+const appliedMiddleware = applyMiddleware(thunk);
+const middleware = composeWithDevTools(appliedMiddleware);
 
 const makeStore = () => createStore(reducers, middleware);
 

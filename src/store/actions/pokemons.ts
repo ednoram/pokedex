@@ -1,5 +1,7 @@
-import { INameURL } from "types/index";
-import { createAction } from "utils/index";
+import { Dispatch } from "redux";
+
+import { createAction, API } from "utils/index";
+import { INameURL, ITypeResponsePokemon } from "types/index";
 
 import {
   SET_PAGE,
@@ -7,7 +9,10 @@ import {
   SET_POKEMONS,
   SET_SORT_OPTION,
   SET_SEARCH_VALUE,
+  SET_TYPE_FILTERED_POKEMONS,
 } from "store/reducers/pokemons";
+import getPokemonIdFromUrl from "utils/getPokemonIdFromUrl";
+import { MAX_POKEMON_COUNT } from "~/src/constants";
 
 export const setPokemons = (pokemons: INameURL[]) =>
   createAction(SET_POKEMONS, { pokemons });
@@ -21,3 +26,22 @@ export const setLimit = (limit: number) => createAction(SET_LIMIT, { limit });
 
 export const setSortOption = (sortOption: string) =>
   createAction(SET_SORT_OPTION, { sortOption });
+
+const setTypeFilteredPokemons = (pokemons: INameURL[] | null) =>
+  createAction(SET_TYPE_FILTERED_POKEMONS, { pokemons });
+
+export const filterByType = (type: INameURL) => async (dispatch: Dispatch) => {
+  const response = type.url ? await API.get(type.url) : null;
+  const pokemonData = response?.data.pokemon || null;
+  const pokemons = pokemonData
+    ? pokemonData.map((item: ITypeResponsePokemon) => item.pokemon)
+    : null;
+  const filteredPokemons = pokemons
+    ? pokemons.filter(
+        (pokemon: INameURL) =>
+          getPokemonIdFromUrl(pokemon.url) < MAX_POKEMON_COUNT
+      )
+    : null;
+
+  dispatch(setTypeFilteredPokemons(filteredPokemons));
+};

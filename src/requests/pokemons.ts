@@ -2,10 +2,11 @@ import { compact } from "lodash";
 
 import { API } from "utils/index";
 import { INameURL, PokemonGenderEnum } from "types/index";
+import { MAX_POKEMON_COUNT, UNKNOWN_TYPE_NAME } from "constants/index";
 
 export const getAllPokemons = async () => {
   const { data } = await API.get("pokemon", {
-    params: { offset: 0, limit: 898 },
+    params: { offset: 0, limit: MAX_POKEMON_COUNT },
   });
 
   return data.results;
@@ -34,4 +35,12 @@ export const getPokemonGenders = async (
     malePokemonNames.includes(name) ? PokemonGenderEnum.MALE : null,
     femalePokemonNames.includes(name) ? PokemonGenderEnum.FEMALE : null,
   ]);
+};
+
+export const getPokemonTypes = async () => {
+  const { data } = await API.get("/type");
+
+  return data.results.filter(
+    (type: INameURL) => type.name !== UNKNOWN_TYPE_NAME
+  );
 };

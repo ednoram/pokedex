@@ -1,1 +1,6 @@
-export * from "./pokemons";
+export {
+  getPokemonData,
+  getAllPokemons,
+  getPokemonTypes,
+  getPokemonGenders,
+} from "./pokemons";

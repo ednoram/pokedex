@@ -9,6 +9,7 @@ export const SET_LIMIT = "SET_LIMIT";
 export const SET_POKEMONS = "SET_POKEMONS";
 export const SET_SORT_OPTION = "SET_SORT_OPTION";
 export const SET_SEARCH_VALUE = "SET_SEARCH_VALUE";
+export const SET_TYPE_FILTERED_POKEMONS = "SET_TYPE_FILTERED_POKEMONS";
 
 export interface IPokemonsState {
   count: number;
@@ -17,6 +18,7 @@ export interface IPokemonsState {
   searchValue: string;
   pokemons: INameURL[];
   sortOption: SortOptionsEnum;
+  typeFilteredPokemons: INameURL[] | null;
 }
 
 const INITIAL_STATE: IPokemonsState = {
@@ -25,6 +27,7 @@ const INITIAL_STATE: IPokemonsState = {
   pokemons: [],
   searchValue: "",
   limit: LIMIT_OPTIONS[1],
+  typeFilteredPokemons: null,
   sortOption: SortOptionsEnum.LOWEST_TO_HIGHEST_SORT,
 };
 
@@ -69,6 +72,17 @@ const pokemonsReducer = (
 
     case SET_SORT_OPTION: {
       return { ...state, sortOption: payload.sortOption, offset: 0 };
+    }
+
+    case SET_TYPE_FILTERED_POKEMONS: {
+      const count = payload.pokemons?.length ?? state.pokemons.length;
+
+      return {
+        ...state,
+        count,
+        offset: 0,
+        typeFilteredPokemons: payload.pokemons,
+      };
     }
 
     default: {

@@ -1,7 +1,6 @@
 .dropdown {
   min-width: 56px;
   color: $primary-color;
-  cursor: pointer;
   font-weight: 500;
   user-select: none;
   position: relative;
@@ -10,6 +9,7 @@
     @include flex-space-between;
     padding: 8px 6px 8px 12px;
     text-align: center;
+    cursor: pointer;
 
     &_active {
       box-shadow: $box-shadow;
@@ -36,6 +36,7 @@
     &__item {
       padding: 8px 12px;
       text-align: center;
+      cursor: pointer;
 
       &:hover {
         background: $primary-color;

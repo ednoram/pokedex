@@ -3,25 +3,22 @@ import { uniq } from "lodash";
 import classNames from "classnames";
 
 import { useOutsideClick } from "hooks/index";
-import { SortOptionsEnum } from "types/index";
 import RightArrow from "assets/RightArrow.svg";
 
 import styles from "./Dropdown.module.scss";
 
-type SetOptionFuncType = (value: string) => void;
-
 interface IProps {
   options: string[];
   className?: string;
-  selectedOption: string | SortOptionsEnum;
-  setSelectedOption:
-    | React.Dispatch<React.SetStateAction<string>>
-    | SetOptionFuncType;
+  selectedOption: string;
+  optionsClassName?: string;
+  setSelectedOption: (value: string) => void;
 }
 
 const Dropdown: React.FC<IProps> = ({
   className,
   options,
+  optionsClassName,
   setSelectedOption,
   selectedOption,
 }) => {
@@ -39,12 +36,13 @@ const Dropdown: React.FC<IProps> = ({
 
   useOutsideClick(dropdownRef, closeDropdown);
 
-  const headClassName = classNames(styles.dropdown__head, {
+  const headClasses = classNames(styles.dropdown__head, {
     [styles.dropdown__head_active]: isOpen,
   });
-  const arrowClassName = classNames(styles.dropdown__head__icon, {
+  const arrowClasses = classNames(styles.dropdown__head__icon, {
     [styles.dropdown__head__icon_active]: isOpen,
   });
+  const optionsClasses = classNames(styles.dropdown__options, optionsClassName);
 
   const optionsList = useMemo(
     () =>
@@ -74,12 +72,12 @@ const Dropdown: React.FC<IProps> = ({
         role="button"
         ref={dropdownRef}
         onClick={toggleOpen}
-        className={headClassName}
+        className={headClasses}
       >
         <p>{selectedOption}</p>
-        <RightArrow className={arrowClassName} />
+        <RightArrow className={arrowClasses} />
       </div>
-      {isOpen && <div className={styles.dropdown__options}>{optionsList}</div>}
+      {isOpen && <div className={optionsClasses}>{optionsList}</div>}
     </div>
   );
 };

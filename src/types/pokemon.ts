@@ -75,3 +75,8 @@ export enum SortOptionsEnum {
   LOWEST_TO_HIGHEST_SORT = "Lowest to highest number",
   HIGHEST_TO_LOWEST_SORT = "Highest to lowest number",
 }
+
+export interface ITypeResponsePokemon {
+  slot: number;
+  pokemon: INameURL;
+}

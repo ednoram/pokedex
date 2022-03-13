@@ -7,26 +7,6 @@
     color: $primary-color;
   }
 
-  &__controls {
-    @include flex-space-between(row);
-    margin-top: 20px;
-
-    &__left {
-      @include flex-space-between(row);
-      gap: 20px;
-
-      &__dropdown {
-        box-shadow: $box-shadow;
-        min-width: 256px;
-        color: black;
-
-        p {
-          text-align: left !important;
-        }
-      }
-    }
-  }
-
   &__list {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));

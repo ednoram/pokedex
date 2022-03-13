@@ -1,0 +1,37 @@
+.controls {
+  @include flex-space-between(row);
+  margin-top: 20px;
+
+  &__left {
+    @include flex-space-between(row);
+    gap: 20px;
+
+    &__dropdown {
+      box-shadow: $box-shadow;
+      min-width: 256px;
+      color: black;
+      text-transform: capitalize;
+
+      p {
+        text-align: left !important;
+      }
+
+      &_types {
+        min-width: 120px;
+
+        &__options {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          width: 200%;
+        }
+      }
+    }
+  }
+
+  &__right {
+    @include flex-space-between(row);
+    gap: 10px;
+    color: $primary-color;
+    font-weight: 500;
+  }
+}

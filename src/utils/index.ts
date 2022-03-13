@@ -10,5 +10,6 @@ export { default as getPokemonTypesText } from "./getPokemonTypesText";
 export { default as getPokemonAvatarSrc } from "./getPokemonAvatarSrc";
 export { default as getEvolutionPokemons } from "./getEvolutionPokemons";
 export { default as getPokemonFlavorText } from "./getPokemonFlavorText";
+export { default as capitalizeFirstLetter } from "./capitalizeFirstLetter";
 export { default as getPokemonSortFunction } from "./getPokemonSortFunction";
 export { default as getPaginationButtonNames } from "./getPaginationButtonNames";
