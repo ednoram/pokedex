@@ -1,8 +1,15 @@
 @mixin container {
-  max-width: 1100px;
+  max-width: 1180px;
   width: 100%;
   margin: 0 auto;
-  padding: 60px 0 140px;
+  padding: 60px 32px 140px;
+
+  @include breakpoint(tablet-small) {
+    padding: 60px 20px 100px;
+  }
+  @include breakpoint(phone) {
+    padding: 50px 16px 90px;
+  }
 }
 
 @mixin flex-center {

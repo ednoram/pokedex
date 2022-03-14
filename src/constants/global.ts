@@ -17,3 +17,5 @@ export const SORT_OPTIONS: SortOptionsEnum[] = [
 
 export const ALL_TYPES_NAME = "all types";
 export const UNKNOWN_TYPE_NAME = "unknown";
+
+export const HP_TEXT = "HP";

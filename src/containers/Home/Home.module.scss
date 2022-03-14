@@ -24,11 +24,4 @@
     display: flex;
     justify-content: flex-end;
   }
-
-  &__loader {
-    display: grid;
-    place-items: center;
-    width: 100%;
-    margin: 80px 0;
-  }
 }

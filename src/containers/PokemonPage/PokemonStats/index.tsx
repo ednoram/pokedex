@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import classNames from "classnames";
 
-import { MAX_STAT_VALUES } from "constants/index";
+import { HP_TEXT, MAX_STAT_VALUES } from "constants/index";
 import { IPokemonStat, PokemonStatName } from "types/index";
 
 import styles from "./PokemonStats.module.scss";
@@ -31,7 +31,8 @@ const PokemonStats: React.FC<IProps> = ({ pokemonStats }) => {
     () =>
       pokemonStats.map(({ stat, base_stat }) => {
         const nameWithoutDash = stat.name.replace("-", " ");
-        const statName = stat.name === "hp" ? "HP" : nameWithoutDash;
+        const statName =
+          stat.name === HP_TEXT.toLowerCase() ? HP_TEXT : nameWithoutDash;
 
         return (
           <div key={stat.name}>
@@ -42,6 +43,7 @@ const PokemonStats: React.FC<IProps> = ({ pokemonStats }) => {
                   stat.name,
                   base_stat
                 );
+
                 return <div key={number} className={className} />;
               })}
             </div>
@@ -54,7 +56,7 @@ const PokemonStats: React.FC<IProps> = ({ pokemonStats }) => {
 
   return (
     <div className={styles.content}>
-      <h2>Stats</h2>
+      <h2 className={styles.content__heading}>Stats</h2>
       <div className={styles.content__stats}>{statsSection}</div>
     </div>
   );

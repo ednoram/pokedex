@@ -13,7 +13,7 @@ interface IProps {
 const PokemonEvolutions: React.FC<IProps> = ({ pokemons }) => {
   return (
     <div className={styles.content}>
-      <h2>Evolutions</h2>
+      <h2 className={styles.content__heading}>Evolutions</h2>
       <div className={styles.content__list}>
         {pokemons.map(({ name, url }, index) => {
           const isLast = index === pokemons.length - 1;
