@@ -7,6 +7,7 @@
   @include breakpoint(tablet-small) {
     padding: 60px 20px 100px;
   }
+
   @include breakpoint(phone) {
     padding: 50px 16px 90px;
   }
@@ -18,7 +19,7 @@
   align-items: center;
 }
 
-@mixin flex-space-between($direction: "row") {
+@mixin flex-space-between($direction: row) {
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -9,5 +9,9 @@ export type {
   IFlavorTextEntry,
   ITypeResponsePokemon,
 } from "./pokemon";
+export {
+  SortOptionsEnum,
+  PokemonGenderEnum,
+  PokemonAvatarQuality,
+} from "./pokemon";
 export type { default as IState } from "./state";
-export { PokemonGenderEnum, SortOptionsEnum } from "./pokemon";

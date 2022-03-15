@@ -1,3 +1,8 @@
+export interface INameURL {
+  url: string;
+  name: string;
+}
+
 export enum PokemonGenderEnum {
   MALE = "male",
   FEMALE = "female",
@@ -11,9 +16,9 @@ export type PokemonStatName =
   | "special-attack"
   | "special-defense";
 
-export interface INameURL {
-  url: string;
-  name: string;
+export enum PokemonAvatarQuality {
+  FULL = "full",
+  DETAIL = "detail",
 }
 
 interface IAbilityItem {

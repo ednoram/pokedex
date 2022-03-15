@@ -12,6 +12,27 @@
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 20px;
     margin-top: 22px;
+
+    @include breakpoint(laptop-small) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @include breakpoint(tablet) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @include breakpoint(tablet-small) {
+      grid-template-columns: 1fr;
+    }
+
+    &__card {
+      @include breakpoint(tablet-large) {
+        min-height: 240px;
+      }
+
+      @include breakpoint(tablet) {
+        min-height: 271px;
+      }
+    }
   }
 
   &__empty_list {
@@ -23,5 +44,13 @@
   &__pagination {
     display: flex;
     justify-content: flex-end;
+
+    @include breakpoint(laptop-small) {
+      justify-content: center;
+    }
+
+    @include breakpoint(tablet) {
+      display: none;
+    }
   }
 }

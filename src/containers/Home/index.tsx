@@ -30,7 +30,7 @@ const HomeContainer: React.FC = () => {
     () =>
       visiblePokemons.map(({ url, name }: INameURL) => (
         <li key={name}>
-          <PokemonCard url={url} />
+          <PokemonCard url={url} className={styles.container__list__card} />
         </li>
       )),
     [visiblePokemons]

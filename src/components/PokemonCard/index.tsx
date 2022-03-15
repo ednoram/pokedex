@@ -18,15 +18,16 @@ import styles from "./PokemonCard.module.scss";
 
 interface IProps {
   url: string;
+  className?: string;
 }
 
-const PokemonCard: React.FC<IProps> = ({ url }) => {
+const PokemonCard: React.FC<IProps> = ({ url, className }) => {
   const { data, error } = useSWR(url, fetcher, { errorRetryCount: 1 });
 
   const pokemonIdString = data ? getPokemonIdString(data.id) : "";
   const pokemonTypes = getPokemonTypesText(data?.types);
 
-  const containerClassNames = classNames(styles.content, {
+  const containerClassNames = classNames(styles.content, className, {
     [styles.content_centered]: error || !data,
   });
 
@@ -41,8 +42,8 @@ const PokemonCard: React.FC<IProps> = ({ url }) => {
           <Link href={pokemonRoute}>
             <div className={styles.content__avatar}>
               <Image
-                width={150}
-                height={150}
+                width={160}
+                height={160}
                 alt="pokemon avatar"
                 src={getPokemonAvatarSrc(data.id)}
                 className={styles.container__avatar__image}

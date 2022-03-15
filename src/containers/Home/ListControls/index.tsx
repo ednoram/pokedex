@@ -60,6 +60,7 @@ const ListControls: React.FC = () => {
         <Searchbar
           placeholder="Search by name"
           setSearchValue={setSearchValue}
+          className={styles.controls__left__searchbar}
         />
         <Dropdown
           options={pokemonTypesOptions}

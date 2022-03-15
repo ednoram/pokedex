@@ -1,15 +1,21 @@
 import React, { FormEvent, memo, useRef } from "react";
+import classNames from "classnames";
 
 import SearchIcon from "assets/SearchIcon.svg";
 
 import styles from "./Searchbar.module.scss";
 
 interface IProps {
+  className?: string;
   placeholder: string;
   setSearchValue: (value: string) => void;
 }
 
-const Searchbar: React.FC<IProps> = ({ placeholder, setSearchValue }) => {
+const Searchbar: React.FC<IProps> = ({
+  className,
+  placeholder,
+  setSearchValue,
+}) => {
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: FormEvent) => {
@@ -24,17 +30,18 @@ const Searchbar: React.FC<IProps> = ({ placeholder, setSearchValue }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className={styles.container}>
-        <input
-          ref={searchInputRef}
-          placeholder={placeholder}
-          className={styles.container__input}
-        />
-        <button name="search" className={styles.container__search_button}>
-          <SearchIcon />
-        </button>
-      </div>
+    <form
+      onSubmit={handleSubmit}
+      className={classNames(styles.container, className)}
+    >
+      <input
+        ref={searchInputRef}
+        placeholder={placeholder}
+        className={styles.container__input}
+      />
+      <button name="search" className={styles.container__search_button}>
+        <SearchIcon />
+      </button>
     </form>
   );
 };

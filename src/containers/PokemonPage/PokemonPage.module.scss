@@ -91,6 +91,9 @@
 
       @include breakpoint(laptop-small) {
         font-size: 1.25rem;
+      }
+
+      @include breakpoint(tablet) {
         text-align: center;
         margin: 0 20px;
       }
