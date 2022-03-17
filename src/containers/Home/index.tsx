@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { INameURL } from "types/index";
@@ -7,34 +7,28 @@ import { pokemonSelectors } from "selectors/index";
 import { Pagination, PokemonCard } from "components/index";
 
 import styles from "./Home.module.scss";
+import LoadMore from "./LoadMore/index";
 import ListControls from "./ListControls/index";
 
 const HomeContainer: React.FC = () => {
   const visiblePokemons = useSelector(pokemonSelectors.selectVisiblePokemons);
-  const { count, limit, offset } = useSelector(
-    pokemonSelectors.selectPaginationParams
-  );
+  const { count, limit } = useSelector(pokemonSelectors.selectPaginationParams);
   const currentPage = useSelector(pokemonSelectors.selectCurrentPage);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, [limit, offset]);
-
   const setPage = (page: number) => {
     dispatch(pokemonActions.setPage(page));
+    window.scroll(0, 0);
   };
 
-  const pokemonCards = useMemo(
-    () =>
-      visiblePokemons.map(({ url, name }: INameURL) => (
-        <li key={name}>
-          <PokemonCard url={url} className={styles.container__list__card} />
-        </li>
-      )),
-    [visiblePokemons]
-  );
+  const pokemonCards = useMemo(() => {
+    return visiblePokemons.map(({ url, name }: INameURL) => (
+      <li key={name}>
+        <PokemonCard url={url} className={styles.container__list__card} />
+      </li>
+    ));
+  }, [visiblePokemons]);
 
   return (
     <div className={styles.container}>
@@ -53,6 +47,7 @@ const HomeContainer: React.FC = () => {
           currentPage={currentPage}
         />
       </div>
+      <LoadMore />
     </div>
   );
 };

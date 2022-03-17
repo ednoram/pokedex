@@ -1,6 +1,14 @@
 .container {
   @include container;
 
+  @include breakpoint(tablet) {
+    padding-bottom: 160px;
+  }
+
+  @include breakpoint(tablet-small) {
+    padding-bottom: 140px;
+  }
+
   &__title {
     text-align: center;
     font-size: 3rem;

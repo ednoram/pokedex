@@ -19,3 +19,8 @@ export const ALL_TYPES_NAME = "all types";
 export const UNKNOWN_TYPE_NAME = "unknown";
 
 export const HP_TEXT = "HP";
+
+export const TABLET_SIZE = 768;
+
+export const MOBILE_LIMIT_STEP = 20;
+export const MOBILE_LOAD_MORE_DELAY = 600;
