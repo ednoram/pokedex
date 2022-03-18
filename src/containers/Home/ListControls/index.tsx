@@ -21,6 +21,15 @@ const ListControls: React.FC = () => {
 
   const dispatch = useDispatch();
 
+  const limitStringOptions = LIMIT_OPTIONS.map((item) => String(item));
+
+  const pokemonTypesOptions = [ALL_TYPES_NAME, ...pokemonTypeNames];
+
+  const typesDropdownClasses = classNames(
+    styles.controls__left__dropdown,
+    styles.controls__left__dropdown_types
+  );
+
   useEffect(() => {
     dispatch(pokemonActions.setLimit(limitOption));
   }, [limitOption]);
@@ -28,8 +37,6 @@ const ListControls: React.FC = () => {
   useEffect(() => {
     dispatch(pokemonActions.filterByType(activeType));
   }, [activeType]);
-
-  const limitStringOptions = LIMIT_OPTIONS.map((item) => String(item));
 
   const setLimitOptionValue = (value: string) => {
     setLimitOption(Number(value));
@@ -46,13 +53,6 @@ const ListControls: React.FC = () => {
   const setSearchValue = useCallback((value: string) => {
     dispatch(pokemonActions.setSearchValue(value));
   }, []);
-
-  const pokemonTypesOptions = [ALL_TYPES_NAME, ...pokemonTypeNames];
-
-  const typesDropdownClasses = classNames(
-    styles.controls__left__dropdown,
-    styles.controls__left__dropdown_types
-  );
 
   return (
     <div className={styles.controls}>

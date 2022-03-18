@@ -3,16 +3,10 @@ import classNames from "classnames";
 
 import { getPaginationButtonNames } from "utils/index";
 
+import { PaginationTypes } from "./types";
 import styles from "./Pagination.module.scss";
 
-interface IProps {
-  limit: number;
-  totalCount: number;
-  currentPage: number;
-  setPage: (page: number) => void;
-}
-
-const Pagination: React.FC<IProps> = ({
+const Pagination: React.FC<PaginationTypes> = ({
   limit,
   setPage,
   totalCount,
@@ -26,6 +20,8 @@ const Pagination: React.FC<IProps> = ({
     currentPage,
   });
 
+  const isHidden = totalCount <= limit;
+
   const handlePrevPageClick = () => {
     setPage(currentPage - 1);
   };
@@ -35,7 +31,7 @@ const Pagination: React.FC<IProps> = ({
   };
 
   return (
-    <ul className={styles.content} hidden={totalCount <= limit}>
+    <ul className={styles.content} hidden={isHidden}>
       <li>
         <button
           name="previous page"
@@ -46,19 +42,23 @@ const Pagination: React.FC<IProps> = ({
           Prev.
         </button>
       </li>
-      {buttonNames.map((name) => (
-        <li key={name}>
-          <button
-            name={`${name} page`}
-            onClick={() => setPage(name)}
-            className={classNames(styles.content__button, {
-              [styles.content__button_active]: name === currentPage,
-            })}
-          >
-            {name}
-          </button>
-        </li>
-      ))}
+      {buttonNames.map((name) => {
+        const buttonName = `${name} page`;
+
+        return (
+          <li key={name}>
+            <button
+              name={buttonName}
+              onClick={() => setPage(name)}
+              className={classNames(styles.content__button, {
+                [styles.content__button_active]: name === currentPage,
+              })}
+            >
+              {name}
+            </button>
+          </li>
+        );
+      })}
       <li>
         <button
           name="next page"

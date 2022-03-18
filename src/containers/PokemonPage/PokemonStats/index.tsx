@@ -1,16 +1,13 @@
 import React, { useCallback, useMemo } from "react";
 import classNames from "classnames";
 
+import { PokemonStatName } from "types/index";
 import { HP_TEXT, MAX_STAT_VALUES } from "constants/index";
-import { IPokemonStat, PokemonStatName } from "types/index";
 
+import { PokemonStatsProps } from "./types";
 import styles from "./PokemonStats.module.scss";
 
-interface IProps {
-  pokemonStats: IPokemonStat[];
-}
-
-const PokemonStats: React.FC<IProps> = ({ pokemonStats }) => {
+const PokemonStats: React.FC<PokemonStatsProps> = ({ pokemonStats }) => {
   const blockNumbers = Array.from({ length: 15 }, (_, index) => index);
 
   const getBlockClassName = useCallback(

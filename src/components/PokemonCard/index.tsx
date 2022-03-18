@@ -14,14 +14,12 @@ import {
 } from "utils/index";
 import { Loader } from "components/index";
 
+import { PokemonCardProps } from "./types";
 import styles from "./PokemonCard.module.scss";
 
-interface IProps {
-  url: string;
-  className?: string;
-}
+const IMAGE_RESOLUTION = 160;
 
-const PokemonCard: React.FC<IProps> = ({ url, className }) => {
+const PokemonCard: React.FC<PokemonCardProps> = ({ url, className }) => {
   const { data, error } = useSWR(url, fetcher, { errorRetryCount: 1 });
 
   const pokemonIdString = data ? getPokemonIdString(data.id) : "";
@@ -42,9 +40,9 @@ const PokemonCard: React.FC<IProps> = ({ url, className }) => {
           <Link href={pokemonRoute}>
             <div className={styles.content__avatar}>
               <Image
-                width={160}
-                height={160}
                 alt="pokemon avatar"
+                width={IMAGE_RESOLUTION}
+                height={IMAGE_RESOLUTION}
                 src={getPokemonAvatarSrc(data.id)}
                 className={styles.container__avatar__image}
               />

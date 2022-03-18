@@ -1,16 +1,12 @@
 import React from "react";
 
-import { INameURL } from "types/index";
 import RightArrow from "assets/RightArrow.svg";
 import { PokemonCard } from "components/index";
 
+import { PokemonEvolutionsProps } from "./types";
 import styles from "./PokemonEvolutions.module.scss";
 
-interface IProps {
-  pokemons: INameURL[];
-}
-
-const PokemonEvolutions: React.FC<IProps> = ({ pokemons }) => {
+const PokemonEvolutions: React.FC<PokemonEvolutionsProps> = ({ pokemons }) => {
   return (
     <div className={styles.content}>
       <h2 className={styles.content__heading}>Evolutions</h2>

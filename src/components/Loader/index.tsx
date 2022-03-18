@@ -1,13 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 
+import { LoaderProps } from "./types";
 import styles from "./Loader.module.scss";
 
-interface IProps {
-  loadingMore?: boolean;
-}
-
-const Loader: React.FC<IProps> = ({ loadingMore }) => {
+const Loader: React.FC<LoaderProps> = ({ loadingMore }) => {
   const containerClassNames = classNames(styles.container, {
     [styles.container_loading_more]: loadingMore,
   });

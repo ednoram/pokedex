@@ -11,18 +11,12 @@ import {
   getAllPokemons,
   getPokemonGenders,
 } from "requests/index";
+import { INameURL } from "types/index";
 import { HelmetLayout } from "layouts/index";
 import { PokemonPageContainer } from "containers/index";
-import { INameURL, IPokemonData, IPokemonSpecies } from "types/index";
+import { PokemonPageProps } from "containers/PokemonPage/types";
 
-interface IProps {
-  genders: string[];
-  pokemonData: IPokemonData;
-  evolutionPokemons: INameURL[];
-  pokemonSpecies: IPokemonSpecies;
-}
-
-const PokemonPage: NextPage<IProps> = ({
+const PokemonPage: NextPage<PokemonPageProps> = ({
   genders,
   pokemonData,
   pokemonSpecies,

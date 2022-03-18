@@ -1,40 +1,24 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef } from "react";
 import { uniq } from "lodash";
 import classNames from "classnames";
+import { useToggle } from "react-use";
 
 import { useOutsideClick } from "hooks/index";
 import RightArrow from "assets/RightArrow.svg";
 
+import { DropdownProps } from "./types";
 import styles from "./Dropdown.module.scss";
 
-interface IProps {
-  options: string[];
-  className?: string;
-  selectedOption: string;
-  optionsClassName?: string;
-  setSelectedOption: (value: string) => void;
-}
-
-const Dropdown: React.FC<IProps> = ({
+const Dropdown: React.FC<DropdownProps> = ({
   className,
   options,
   optionsClassName,
   setSelectedOption,
   selectedOption,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, toggleIsOpen] = useToggle(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const closeDropdown = () => {
-    setIsOpen(false);
-  };
-
-  const toggleOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
-  useOutsideClick(dropdownRef, closeDropdown);
 
   const headClasses = classNames(styles.dropdown__head, {
     [styles.dropdown__head_active]: isOpen,
@@ -44,12 +28,18 @@ const Dropdown: React.FC<IProps> = ({
   });
   const optionsClasses = classNames(styles.dropdown__options, optionsClassName);
 
+  const closeDropdown = () => {
+    toggleIsOpen(false);
+  };
+
+  useOutsideClick(dropdownRef, closeDropdown);
+
   const optionsList = useMemo(
     () =>
       uniq(options).map((option) => {
         const handleClick = () => {
           setSelectedOption(option);
-          setIsOpen(false);
+          closeDropdown();
         };
 
         return (
@@ -71,7 +61,7 @@ const Dropdown: React.FC<IProps> = ({
       <div
         role="button"
         ref={dropdownRef}
-        onClick={toggleOpen}
+        onClick={toggleIsOpen}
         className={headClasses}
       >
         <p>{selectedOption}</p>

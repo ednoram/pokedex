@@ -8,21 +8,14 @@ import {
   getPokemonAvatarSrc,
 } from "utils/index";
 import { Loader } from "components/index";
-import { INameURL, IPokemonData, IPokemonSpecies } from "types/index";
 
+import { PokemonPageProps } from "./types";
 import styles from "./PokemonPage.module.scss";
 import PokemonStats from "./PokemonStats/index";
 import PokemonInfoGrid from "./PokemonInfoGrid/index";
 import PokemonEvolutions from "./PokemonEvolutions/index";
 
-interface IProps {
-  genders: string[];
-  pokemonData: IPokemonData;
-  evolutionPokemons: INameURL[];
-  pokemonSpecies: IPokemonSpecies;
-}
-
-const PokemonPageContainer: React.FC<IProps> = ({
+const PokemonPageContainer: React.FC<PokemonPageProps> = ({
   genders,
   pokemonData,
   pokemonSpecies,

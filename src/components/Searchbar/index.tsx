@@ -3,15 +3,10 @@ import classNames from "classnames";
 
 import SearchIcon from "assets/SearchIcon.svg";
 
+import { SearchbarProps } from "./types";
 import styles from "./Searchbar.module.scss";
 
-interface IProps {
-  className?: string;
-  placeholder: string;
-  setSearchValue: (value: string) => void;
-}
-
-const Searchbar: React.FC<IProps> = ({
+const Searchbar: React.FC<SearchbarProps> = ({
   className,
   placeholder,
   setSearchValue,

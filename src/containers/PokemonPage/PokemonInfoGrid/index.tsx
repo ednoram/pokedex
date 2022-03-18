@@ -1,17 +1,11 @@
 import React, { useMemo } from "react";
 
 import { kgToLbs, metersToFt } from "utils/index";
-import { IPokemonData, IPokemonSpecies } from "types/index";
 
+import { PokemonInfoGridProps } from "./types";
 import styles from "./PokemonInfoGrid.module.scss";
 
-interface IProps {
-  genders: string[];
-  pokemonData: IPokemonData;
-  pokemonSpecies: IPokemonSpecies;
-}
-
-const PokemonInfoGrid: React.FC<IProps> = ({
+const PokemonInfoGrid: React.FC<PokemonInfoGridProps> = ({
   genders,
   pokemonData,
   pokemonSpecies,
