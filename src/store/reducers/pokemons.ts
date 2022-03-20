@@ -2,7 +2,7 @@ import { AnyAction } from "redux";
 
 import { filterPokemons } from "utils/index";
 import { INameURL, SortOptionsEnum } from "types/index";
-import { HYDRATE, LIMIT_OPTIONS } from "constants/index";
+import { DEFAULT_LIMIT_OPTION, HYDRATE } from "constants/index";
 
 export const SET_PAGE = "SET_PAGE";
 export const SET_LIMIT = "SET_LIMIT";
@@ -26,8 +26,8 @@ const INITIAL_STATE: IPokemonsState = {
   offset: 0,
   pokemons: [],
   searchValue: "",
-  limit: LIMIT_OPTIONS[1],
   typeFilteredPokemons: null,
+  limit: DEFAULT_LIMIT_OPTION,
   sortOption: SortOptionsEnum.LOWEST_TO_HIGHEST_SORT,
 };
 
@@ -37,7 +37,7 @@ const pokemonsReducer = (
 ) => {
   switch (type) {
     case HYDRATE: {
-      return payload.pokemons;
+      return state.pokemons.length ? state : payload.pokemons;
     }
 
     case SET_POKEMONS: {

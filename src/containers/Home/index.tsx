@@ -14,6 +14,7 @@ const HomeContainer: React.FC = () => {
   const visiblePokemons = useSelector(pokemonSelectors.selectVisiblePokemons);
   const { count, limit } = useSelector(pokemonSelectors.selectPaginationParams);
   const currentPage = useSelector(pokemonSelectors.selectCurrentPage);
+  const searchValue = useSelector(pokemonSelectors.selectSearchValue);
 
   const dispatch = useDispatch();
 
@@ -36,6 +37,11 @@ const HomeContainer: React.FC = () => {
     <div className={styles.container}>
       <h1 className={styles.container__title}>Pokédex</h1>
       <ListControls />
+      {searchValue && (
+        <p className={styles.container__search_filter}>
+          Showing matches for &quot;{searchValue}&quot;
+        </p>
+      )}
       {pokemonCards.length ? (
         <ul className={styles.container__list}>{pokemonCards}</ul>
       ) : (

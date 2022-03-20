@@ -25,7 +25,7 @@ const pokemonTypesReducer = (
 ) => {
   switch (type) {
     case HYDRATE: {
-      return payload.pokemonTypes;
+      return state.activeType.url ? state : payload.pokemonTypes;
     }
 
     case SET_POKEMON_TYPES: {

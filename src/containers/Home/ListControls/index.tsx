@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,8 +17,6 @@ const ListControls: React.FC = () => {
   const activeType = useSelector(pokemonTypesSelectors.selectActiveType);
   const { limit } = useSelector(pokemonSelectors.selectPaginationParams);
 
-  const [limitOption, setLimitOption] = useState<number>(limit);
-
   const dispatch = useDispatch();
 
   const limitStringOptions = LIMIT_OPTIONS.map((item) => String(item));
@@ -31,15 +29,11 @@ const ListControls: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch(pokemonActions.setLimit(limitOption));
-  }, [limitOption]);
-
-  useEffect(() => {
     dispatch(pokemonActions.filterByType(activeType));
   }, [activeType]);
 
-  const setLimitOptionValue = (value: string) => {
-    setLimitOption(Number(value));
+  const setLimitValue = (limitOption: string) => {
+    dispatch(pokemonActions.setLimit(Number(limitOption)));
   };
 
   const setActiveType = (typeName: string) => {
@@ -80,8 +74,8 @@ const ListControls: React.FC = () => {
         <p>Show per page: </p>
         <Dropdown
           options={limitStringOptions}
-          selectedOption={String(limitOption)}
-          setSelectedOption={setLimitOptionValue}
+          selectedOption={String(limit)}
+          setSelectedOption={setLimitValue}
         />
       </div>
     </div>

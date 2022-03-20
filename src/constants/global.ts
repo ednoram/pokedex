@@ -7,6 +7,7 @@ export const HYDRATE = "__NEXT_REDUX_WRAPPER_HYDRATE__";
 
 export const MAX_POKEMON_COUNT = 898;
 export const LIMIT_OPTIONS = [10, 20, 50];
+export const DEFAULT_LIMIT_OPTION = LIMIT_OPTIONS[1];
 
 export const SORT_OPTIONS: SortOptionsEnum[] = [
   SortOptionsEnum.LOWEST_TO_HIGHEST_SORT,

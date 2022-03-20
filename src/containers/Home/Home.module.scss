@@ -15,6 +15,11 @@
     color: $primary-color;
   }
 
+  &__search_filter {
+    margin-top: 20px;
+    padding-left: 4px;
+  }
+
   &__list {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
