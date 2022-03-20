@@ -26,6 +26,11 @@
     }
   }
 
+  &__list_loading {
+    @include flex-center;
+    height: 300px;
+  }
+
   &__list {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));

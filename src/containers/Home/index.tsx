@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { INameURL } from "types/index";
 import { pokemonActions } from "actions/index";
 import { pokemonSelectors } from "selectors/index";
-import { Pagination, PokemonCard } from "components/index";
+import { Pagination, PokemonCard, Loader } from "components/index";
 
 import styles from "./Home.module.scss";
 import LoadMore from "./LoadMore/index";
@@ -15,6 +15,7 @@ const HomeContainer: React.FC = () => {
   const { count, limit } = useSelector(pokemonSelectors.selectPaginationParams);
   const currentPage = useSelector(pokemonSelectors.selectCurrentPage);
   const searchValue = useSelector(pokemonSelectors.selectSearchValue);
+  const isLoading = useSelector(pokemonSelectors.selectPokemonsLoading);
 
   const dispatch = useDispatch();
 
@@ -33,6 +34,12 @@ const HomeContainer: React.FC = () => {
     [visiblePokemons]
   );
 
+  const list = pokemonCards.length ? (
+    <ul className={styles.container__list}>{pokemonCards}</ul>
+  ) : (
+    <p className={styles.container__empty_list}>Nothing was found</p>
+  );
+
   return (
     <div className={styles.container}>
       <h1 className={styles.container__title}>Pokédex</h1>
@@ -45,19 +52,23 @@ const HomeContainer: React.FC = () => {
           </span>
         </p>
       )}
-      {pokemonCards.length ? (
-        <ul className={styles.container__list}>{pokemonCards}</ul>
+      {isLoading ? (
+        <div className={styles.container__list_loading}>
+          <Loader />
+        </div>
       ) : (
-        <p className={styles.container__empty_list}>Nothing was found</p>
+        <React.Fragment>
+          {list}
+          <div className={styles.container__pagination}>
+            <Pagination
+              limit={limit}
+              setPage={setPage}
+              totalCount={count}
+              currentPage={currentPage}
+            />
+          </div>
+        </React.Fragment>
       )}
-      <div className={styles.container__pagination}>
-        <Pagination
-          limit={limit}
-          setPage={setPage}
-          totalCount={count}
-          currentPage={currentPage}
-        />
-      </div>
       <LoadMore />
     </div>
   );

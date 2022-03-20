@@ -54,3 +54,8 @@ export const selectSearchValue = createSelector(
     return pokemonsData.searchValue;
   }
 );
+
+export const selectPokemonsLoading = createSelector(
+  selectPokemonsData,
+  (pokemonsData) => pokemonsData.loading
+);

@@ -9,6 +9,7 @@ import {
   SET_POKEMONS,
   SET_SORT_OPTION,
   SET_SEARCH_VALUE,
+  START_POKEMON_TYPE_FILTER,
   SET_TYPE_FILTERED_POKEMONS,
 } from "store/reducers/pokemons";
 import { MAX_POKEMON_COUNT } from "constants/index";
@@ -29,7 +30,12 @@ export const setSortOption = (sortOption: string) =>
 const setTypeFilteredPokemons = (pokemons: INameURL[] | null) =>
   createAction(SET_TYPE_FILTERED_POKEMONS, { pokemons });
 
+const startPokemonTypeFilter = () =>
+  createAction(START_POKEMON_TYPE_FILTER, {});
+
 export const filterByType = (type: INameURL) => async (dispatch: Dispatch) => {
+  dispatch(startPokemonTypeFilter());
+
   const response = type.url ? await API.get(type.url) : null;
   const pokemonData = response?.data.pokemon || null;
   const pokemons = pokemonData
