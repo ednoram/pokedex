@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -16,17 +16,21 @@ const ListControls: React.FC = () => {
   const sortOption = useSelector(pokemonSelectors.selectSortOption);
   const activeType = useSelector(pokemonTypesSelectors.selectActiveType);
   const { limit } = useSelector(pokemonSelectors.selectPaginationParams);
+  const typeFilteredPokemons = useSelector(
+    pokemonSelectors.selectTypeFilteredPokemons
+  );
 
-  const dispatch = useDispatch();
+  const searchSuggestions = typeFilteredPokemons.map((pokemon) => pokemon.name);
 
   const limitStringOptions = LIMIT_OPTIONS.map((item) => String(item));
-
   const pokemonTypesOptions = [ALL_TYPES_NAME, ...pokemonTypeNames];
 
   const typesDropdownClasses = classNames(
     styles.controls__left__dropdown,
     styles.controls__left__dropdown_types
   );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(pokemonActions.filterByType(activeType));
@@ -44,15 +48,16 @@ const ListControls: React.FC = () => {
     dispatch(pokemonActions.setSortOption(sortOption));
   };
 
-  const setSearchValue = useCallback((value: string) => {
+  const setSearchValue = (value: string) => {
     dispatch(pokemonActions.setSearchValue(value));
-  }, []);
+  };
 
   return (
     <div className={styles.controls}>
       <div className={styles.controls__left}>
         <Searchbar
           maxLength={30}
+          options={searchSuggestions}
           placeholder="Search by name"
           setSearchValue={setSearchValue}
           className={styles.controls__left__searchbar}

@@ -1,29 +1,46 @@
-import React, { FormEvent, memo, useRef } from "react";
+import React, { useRef, useState, FormEvent, ChangeEvent } from "react";
 import classNames from "classnames";
 
+import { useOutsideClick } from "hooks/index";
 import SearchIcon from "assets/SearchIcon.svg";
 
 import { SearchbarProps } from "./types";
 import styles from "./Searchbar.module.scss";
+import Suggestions from "./Suggestions/index";
 
 const Searchbar: React.FC<SearchbarProps> = ({
+  options,
   className,
   maxLength,
   placeholder,
   setSearchValue,
 }) => {
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const inputElement = searchInputRef.current;
-
-    if (inputElement) {
-      const searchValue = inputElement.value.trim().toLowerCase();
-      setSearchValue(searchValue);
-    }
+    const searchValue = inputValue.trim().toLowerCase();
+    setSearchValue(searchValue);
+    inputRef.current?.blur();
   };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setInputValue(newValue);
+  };
+
+  const handleInputFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  useOutsideClick(inputRef, () => {
+    setIsInputFocused(false);
+  });
 
   return (
     <form
@@ -31,16 +48,30 @@ const Searchbar: React.FC<SearchbarProps> = ({
       className={classNames(styles.container, className)}
     >
       <input
-        ref={searchInputRef}
+        ref={inputRef}
+        value={inputValue}
         maxLength={maxLength}
         placeholder={placeholder}
+        onFocus={handleInputFocus}
+        onChange={handleInputChange}
         className={styles.container__input}
       />
-      <button name="search" className={styles.container__search_button}>
+      <button
+        name="search"
+        ref={submitButtonRef}
+        className={styles.container__search_button}
+      >
         <SearchIcon />
       </button>
+      <Suggestions
+        options={options}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        isInputFocused={isInputFocused}
+        submitButtonRef={submitButtonRef}
+      />
     </form>
   );
 };
 
-export default memo(Searchbar);
+export default Searchbar;

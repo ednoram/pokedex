@@ -57,5 +57,14 @@ export const selectSearchValue = createSelector(
 
 export const selectPokemonsLoading = createSelector(
   selectPokemonsData,
-  (pokemonsData) => pokemonsData.loading
+  (pokemonsData) => {
+    return pokemonsData.loading;
+  }
+);
+
+export const selectTypeFilteredPokemons = createSelector(
+  selectPokemonsData,
+  ({ pokemons, typeFilteredPokemons }) => {
+    return typeFilteredPokemons || pokemons;
+  }
 );

@@ -17,28 +17,26 @@ const HomeContainer: React.FC = () => {
   const searchValue = useSelector(pokemonSelectors.selectSearchValue);
   const isLoading = useSelector(pokemonSelectors.selectPokemonsLoading);
 
+  const pokemonCards = useMemo(
+    () =>
+      visiblePokemons.length ? (
+        visiblePokemons.map(({ url, name }: INameURL) => (
+          <li key={name}>
+            <PokemonCard url={url} className={styles.container__list__card} />
+          </li>
+        ))
+      ) : (
+        <p className={styles.container__empty_list}>Nothing was found</p>
+      ),
+    [visiblePokemons]
+  );
+
   const dispatch = useDispatch();
 
   const setPage = (page: number) => {
     dispatch(pokemonActions.setPage(page));
     window.scroll(0, 0);
   };
-
-  const pokemonCards = useMemo(
-    () =>
-      visiblePokemons.map(({ url, name }: INameURL) => (
-        <li key={name}>
-          <PokemonCard url={url} className={styles.container__list__card} />
-        </li>
-      )),
-    [visiblePokemons]
-  );
-
-  const list = pokemonCards.length ? (
-    <ul className={styles.container__list}>{pokemonCards}</ul>
-  ) : (
-    <p className={styles.container__empty_list}>Nothing was found</p>
-  );
 
   return (
     <div className={styles.container}>
@@ -58,7 +56,7 @@ const HomeContainer: React.FC = () => {
         </div>
       ) : (
         <React.Fragment>
-          {list}
+          <ul className={styles.container__list}>{pokemonCards}</ul>
           <div className={styles.container__pagination}>
             <Pagination
               limit={limit}
