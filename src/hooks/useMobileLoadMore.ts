@@ -46,11 +46,12 @@ const useMobileLoadMore = ({
       }
 
       const totalHeight = Math.ceil(window.scrollY + windowSize.height);
-      const shouldFunction = totalHeight >= document.body.scrollHeight;
+      const shouldFunction =
+        totalHeight >= document.body.scrollHeight && limit < totalCount;
       const isMobileOrTablet = isTabletOrMobile;
 
       if (shouldFunction) {
-        if (limit < totalCount && isMobileOrTablet) {
+        if (isMobileOrTablet) {
           setLoading(true);
         }
 
