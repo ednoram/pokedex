@@ -1,4 +1,4 @@
-import { IPokemonData, IPokemonSpecies } from "~/src/types";
+import { IPokemonData, IPokemonSpecies } from "types/index";
 
 export type PokemonInfoGridProps = {
   genders: string[];

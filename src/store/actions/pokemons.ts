@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 
-import { createAction, API } from "utils/index";
 import { INameURL, ITypeResponsePokemon } from "types/index";
+import { createAction, API, getPokemonIdFromUrl } from "utils/index";
 
 import {
   SET_PAGE,
@@ -11,8 +11,7 @@ import {
   SET_SEARCH_VALUE,
   SET_TYPE_FILTERED_POKEMONS,
 } from "store/reducers/pokemons";
-import getPokemonIdFromUrl from "utils/getPokemonIdFromUrl";
-import { MAX_POKEMON_COUNT } from "~/src/constants";
+import { MAX_POKEMON_COUNT } from "constants/index";
 
 export const setPokemons = (pokemons: INameURL[]) =>
   createAction(SET_POKEMONS, { pokemons });

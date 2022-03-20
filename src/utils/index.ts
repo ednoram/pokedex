@@ -6,6 +6,7 @@ export { default as filterPokemons } from "./filterPokemons";
 export { default as getPokemonRoute } from "./getPokemonRoute";
 export { default as getPokemonIdString } from "./getPokemonIdString";
 export { default as processPokemonName } from "./processPokemonName";
+export { default as getPokemonIdFromUrl } from "./getPokemonIdFromUrl";
 export { default as getPokemonTypesText } from "./getPokemonTypesText";
 export { default as getPokemonAvatarSrc } from "./getPokemonAvatarSrc";
 export { default as getEvolutionPokemons } from "./getEvolutionPokemons";
