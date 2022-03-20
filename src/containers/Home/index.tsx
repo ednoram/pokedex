@@ -22,13 +22,15 @@ const HomeContainer: React.FC = () => {
     window.scroll(0, 0);
   };
 
-  const pokemonCards = useMemo(() => {
-    return visiblePokemons.map(({ url, name }: INameURL) => (
-      <li key={name}>
-        <PokemonCard url={url} className={styles.container__list__card} />
-      </li>
-    ));
-  }, [visiblePokemons]);
+  const pokemonCards = useMemo(
+    () =>
+      visiblePokemons.map(({ url, name }: INameURL) => (
+        <li key={name}>
+          <PokemonCard url={url} className={styles.container__list__card} />
+        </li>
+      )),
+    [visiblePokemons]
+  );
 
   return (
     <div className={styles.container}>

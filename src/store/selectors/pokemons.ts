@@ -47,3 +47,10 @@ export const selectSortOption = createSelector(
     return pokemonsData.sortOption;
   }
 );
+
+export const selectSearchValue = createSelector(
+  selectPokemonsData,
+  (pokemonsData) => {
+    return pokemonsData.searchValue;
+  }
+);

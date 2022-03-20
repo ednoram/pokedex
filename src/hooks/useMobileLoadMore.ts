@@ -1,21 +1,43 @@
 import { useState, useEffect } from "react";
 
+import {
+  TABLET_SIZE,
+  MOBILE_LIMIT_STEP,
+  MOBILE_LOAD_MORE_DELAY,
+} from "constants/index";
 import { useWindowSize } from "hooks/index";
-import { TABLET_SIZE, MOBILE_LOAD_MORE_DELAY } from "constants/index";
 
 const useMobileLoadMore = ({
   limit,
+  setLimit,
+  sortOption,
+  typeFilter,
   totalCount,
-  extendLimit,
+  searchFilter,
 }: {
   limit: number;
+  sortOption: string;
   totalCount: number;
-  extendLimit: () => void;
+  typeFilter: string;
+  searchFilter: string;
+  setLimit: (newLimit: number) => void;
 }): boolean => {
   const [, setTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const windowSize = useWindowSize();
+
+  const isTabletOrMobile = windowSize.width && windowSize.width <= TABLET_SIZE;
+
+  useEffect(() => {
+    if (isTabletOrMobile && limit > MOBILE_LIMIT_STEP) {
+      setLimit(MOBILE_LIMIT_STEP);
+    }
+  }, [typeFilter, searchFilter, sortOption]);
+
+  const extendLimit = () => {
+    setLimit(limit + MOBILE_LIMIT_STEP);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +47,7 @@ const useMobileLoadMore = ({
 
       const totalHeight = Math.ceil(window.scrollY + windowSize.height);
       const shouldFunction = totalHeight >= document.body.scrollHeight;
-      const isMobileOrTablet = windowSize.width <= TABLET_SIZE;
+      const isMobileOrTablet = isTabletOrMobile;
 
       if (shouldFunction) {
         if (limit < totalCount && isMobileOrTablet) {

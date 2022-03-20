@@ -53,14 +53,15 @@ const pokemonsReducer = (
     }
 
     case SET_LIMIT: {
-      const newOffset =
-        Math.floor(state.offset / payload.limit) * payload.limit;
+      const pageIndex = Math.floor(state.offset / payload.limit);
+      const newOffset = pageIndex * payload.limit;
 
       return { ...state, offset: newOffset, limit: payload.limit };
     }
 
     case SET_SEARCH_VALUE: {
-      const filteredPokemons = filterPokemons(state.pokemons, payload.value);
+      const pokemons = state.typeFilteredPokemons || state.pokemons;
+      const filteredPokemons = filterPokemons(pokemons, payload.value);
 
       return {
         ...state,
@@ -75,12 +76,13 @@ const pokemonsReducer = (
     }
 
     case SET_TYPE_FILTERED_POKEMONS: {
-      const count = payload.pokemons?.length ?? state.pokemons.length;
+      const pokemons = payload.pokemons || state.pokemons;
+      const filteredPokemons = filterPokemons(pokemons, state.searchValue);
 
       return {
         ...state,
-        count,
         offset: 0,
+        count: filteredPokemons.length,
         typeFilteredPokemons: payload.pokemons,
       };
     }
