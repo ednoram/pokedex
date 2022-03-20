@@ -1,5 +1,11 @@
 /* eslint-disable no-undef */
-const nextConfig = {
+const withPWA = require("next-pwa");
+
+const nextConfig = withPWA({
+  pwa: {
+    dest: "public",
+    disable: process.env.NODE_ENV === "development",
+  },
   reactStrictMode: true,
   images: {
     domains: ["assets.pokemon.com"],
@@ -17,6 +23,6 @@ const nextConfig = {
         .map((fileName) => `@import "styles/${fileName}.scss";`)
         .join("\n") + "\n\n",
   },
-};
+});
 
 module.exports = nextConfig;
