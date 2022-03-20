@@ -24,7 +24,9 @@ const Searchbar: React.FC<SearchbarProps> = ({
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const searchValue = inputValue.trim().toLowerCase();
+    const inputRefValue = inputRef.current?.value || "";
+    const searchValue = inputRefValue.trim().toLowerCase();
+
     setSearchValue(searchValue);
     inputRef.current?.blur();
   };
@@ -36,6 +38,10 @@ const Searchbar: React.FC<SearchbarProps> = ({
 
   const handleInputFocus = () => {
     setIsInputFocused(true);
+  };
+
+  const clickSubmit = () => {
+    submitButtonRef.current?.click();
   };
 
   useOutsideClick(inputRef, () => {
@@ -65,10 +71,11 @@ const Searchbar: React.FC<SearchbarProps> = ({
       </button>
       <Suggestions
         options={options}
+        inputRef={inputRef}
         inputValue={inputValue}
+        submitForm={clickSubmit}
         setInputValue={setInputValue}
         isInputFocused={isInputFocused}
-        submitButtonRef={submitButtonRef}
       />
     </form>
   );

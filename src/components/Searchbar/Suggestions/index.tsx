@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
 import { processPokemonName } from "utils/index";
+import { useSuggestionsControls } from "hooks/index";
 
 import { SuggestionsProps } from "./types";
 import styles from "./Suggestions.module.scss";
@@ -10,10 +11,11 @@ const MAX_SUGGESTIONS = 5;
 
 const Suggestions: React.FC<SuggestionsProps> = ({
   options,
+  inputRef,
   inputValue,
+  submitForm,
   setInputValue,
   isInputFocused,
-  submitButtonRef,
 }) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
@@ -22,10 +24,6 @@ const Suggestions: React.FC<SuggestionsProps> = ({
   const optionIsInputValue =
     suggestions.length === 1 &&
     suggestions[0].toLowerCase() === inputFilterValue;
-
-  const clickSubmit = () => {
-    submitButtonRef.current?.click();
-  };
 
   const getSuggestions = (value: string) =>
     options
@@ -43,12 +41,20 @@ const Suggestions: React.FC<SuggestionsProps> = ({
     setSuggestions(newSuggestions);
   }, [inputValue]);
 
+  useSuggestionsControls({
+    inputRef,
+    submitForm,
+    inputValue,
+    suggestions,
+    setInputValue,
+  });
+
   return isInputFocused && isInputValueEmpty && !optionIsInputValue ? (
     <ul className={styles.suggestions}>
       {suggestions.map((option) => {
         const handleClick = () => {
           setInputValue(option);
-          setTimeout(clickSubmit);
+          setTimeout(submitForm);
         };
 
         return (

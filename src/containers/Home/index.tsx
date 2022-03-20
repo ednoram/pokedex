@@ -17,14 +17,16 @@ const HomeContainer: React.FC = () => {
   const searchValue = useSelector(pokemonSelectors.selectSearchValue);
   const isLoading = useSelector(pokemonSelectors.selectPokemonsLoading);
 
-  const pokemonCards = useMemo(
+  const pokemonsList = useMemo(
     () =>
       visiblePokemons.length ? (
-        visiblePokemons.map(({ url, name }: INameURL) => (
-          <li key={name}>
-            <PokemonCard url={url} className={styles.container__list__card} />
-          </li>
-        ))
+        <ul className={styles.container__list}>
+          {visiblePokemons.map(({ url, name }: INameURL) => (
+            <li key={name}>
+              <PokemonCard url={url} className={styles.container__list__card} />
+            </li>
+          ))}
+        </ul>
       ) : (
         <p className={styles.container__empty_list}>Nothing was found</p>
       ),
@@ -56,7 +58,7 @@ const HomeContainer: React.FC = () => {
         </div>
       ) : (
         <React.Fragment>
-          <ul className={styles.container__list}>{pokemonCards}</ul>
+          {pokemonsList}
           <div className={styles.container__pagination}>
             <Pagination
               limit={limit}
