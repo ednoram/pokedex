@@ -39,7 +39,10 @@ const HomeContainer: React.FC = () => {
       <ListControls />
       {searchValue && (
         <p className={styles.container__search_filter}>
-          Showing matches for &quot;{searchValue}&quot;
+          Showing matches for{" "}
+          <span className={styles.container__search_filter__value}>
+            &quot;{searchValue}&quot;
+          </span>
         </p>
       )}
       {pokemonCards.length ? (

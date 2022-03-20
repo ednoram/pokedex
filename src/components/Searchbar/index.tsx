@@ -8,6 +8,7 @@ import styles from "./Searchbar.module.scss";
 
 const Searchbar: React.FC<SearchbarProps> = ({
   className,
+  maxLength,
   placeholder,
   setSearchValue,
 }) => {
@@ -31,6 +32,7 @@ const Searchbar: React.FC<SearchbarProps> = ({
     >
       <input
         ref={searchInputRef}
+        maxLength={maxLength}
         placeholder={placeholder}
         className={styles.container__input}
       />

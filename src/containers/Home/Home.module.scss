@@ -18,6 +18,12 @@
   &__search_filter {
     margin-top: 20px;
     padding-left: 4px;
+    word-break: break-word;
+
+    &__value {
+      font-style: italic;
+      font-weight: 500;
+    }
   }
 
   &__list {

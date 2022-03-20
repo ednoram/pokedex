@@ -52,6 +52,7 @@ const ListControls: React.FC = () => {
     <div className={styles.controls}>
       <div className={styles.controls__left}>
         <Searchbar
+          maxLength={30}
           placeholder="Search by name"
           setSearchValue={setSearchValue}
           className={styles.controls__left__searchbar}
