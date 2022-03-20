@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { uniq } from "lodash";
 import { nanoid } from "nanoid";
 
 import { processPokemonName } from "utils/index";
@@ -38,7 +39,7 @@ const Suggestions: React.FC<SuggestionsProps> = ({
 
   useEffect(() => {
     const newSuggestions = getSuggestions(inputValue.trim());
-    setSuggestions(newSuggestions);
+    setSuggestions(uniq(newSuggestions));
   }, [inputValue]);
 
   useSuggestionsControls({
