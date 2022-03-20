@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useDidUpdateEffect } from "hooks/index";
 import { Dropdown, Searchbar } from "components/index";
 import { pokemonActions, pokemonTypesActions } from "actions/index";
 import { pokemonSelectors, pokemonTypesSelectors } from "selectors/index";
@@ -32,7 +33,7 @@ const ListControls: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     dispatch(pokemonActions.filterByType(activeType));
   }, [activeType]);
 
