@@ -1,4 +1,4 @@
-import { IPokemonTypeItem } from "types/index";
+import { IPokemonTypeItem } from "@types";
 
 const getPokemonTypesText = (types: IPokemonTypeItem[] | undefined): string =>
   types ? types.map(({ type }) => type.name).join(", ") : "";

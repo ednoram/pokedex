@@ -6,13 +6,13 @@ import classNames from "classnames";
 
 import {
   fetcher,
+  getPokemonRoute,
   processPokemonName,
   getPokemonIdString,
   getPokemonAvatarSrc,
   getPokemonTypesText,
-  getPokemonRoute,
-} from "utils/index";
-import { Loader } from "components/index";
+} from "@utils";
+import { Loader } from "@components";
 
 import { PokemonCardProps } from "./types";
 import styles from "./PokemonCard.module.scss";

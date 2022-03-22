@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { uniq } from "lodash";
 import { nanoid } from "nanoid";
 
-import { processPokemonName } from "utils/index";
-import { useSuggestionsControls } from "hooks/index";
+import { processPokemonName } from "@utils";
+import { useSuggestionsControls } from "@hooks";
 
 import { SuggestionsProps } from "./types";
 import styles from "./Suggestions.module.scss";

@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const useDidUpdateEffect = (func: () => unknown, dependencies: unknown[]) => {
-  const [didMount, setDidMount] = useState<boolean>(false);
+  const didMountRef = useRef<boolean>(false);
 
   useEffect(() => {
-    if (didMount) {
+    if (didMountRef.current) {
       func();
     } else {
-      setDidMount(true);
+      didMountRef.current = true;
     }
   }, dependencies);
 };

@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from "react";
 import classNames from "classnames";
 
-import { PokemonStatName } from "types/index";
-import { HP_TEXT, MAX_STAT_VALUES } from "constants/index";
+import { PokemonStatName } from "@types";
+import { HP_TEXT, MAX_STAT_VALUES } from "@constants";
 
 import { PokemonStatsProps } from "./types";
 import styles from "./PokemonStats.module.scss";

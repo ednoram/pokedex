@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-import { kgToLbs, metersToFt } from "utils/index";
+import { kgToLbs, metersToFt } from "@utils";
 
 import { PokemonInfoGridProps } from "./types";
 import styles from "./PokemonInfoGrid.module.scss";
@@ -34,7 +34,7 @@ const PokemonInfoGrid: React.FC<PokemonInfoGridProps> = ({
       pokemonData.abilities.reduce((acc, { ability, is_hidden }) => {
         const node = !is_hidden && <p key={ability.name}>{ability.name}</p>;
 
-        return [...acc, node];
+        return node ? [...acc, node] : acc;
       }, [] as React.ReactNode[]),
     [pokemonData]
   );

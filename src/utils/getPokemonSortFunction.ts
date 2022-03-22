@@ -1,4 +1,4 @@
-import { INameURL, SortOptionsEnum } from "types/index";
+import { INameURL, SortOptionsEnum } from "@types";
 
 const getPokemonSortFunction = (sortOption: SortOptionsEnum) => {
   const alphabeticalSortASC = (a: INameURL, b: INameURL) => {

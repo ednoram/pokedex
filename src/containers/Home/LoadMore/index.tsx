@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Loader } from "components/index";
-import { pokemonActions } from "actions/index";
-import { useMobileLoadMore } from "hooks/index";
-import { pokemonSelectors, pokemonTypesSelectors } from "selectors/index";
+import { Loader } from "@components";
+import { pokemonActions } from "@actions";
+import { useMobileLoadMore } from "@hooks";
+import { pokemonSelectors, pokemonTypesSelectors } from "@selectors";
 
 const LoadMore: React.FC = () => {
   const sortOption = useSelector(pokemonSelectors.selectSortOption);

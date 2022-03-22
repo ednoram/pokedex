@@ -1,7 +1,7 @@
 import axios from "axios";
 import { compact } from "lodash";
 
-import { IEvolutionChain, INameURL } from "types/index";
+import { IEvolutionChain, INameURL } from "@types";
 
 const getEvolutionPokemons = async (
   chain: IEvolutionChain

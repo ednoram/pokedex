@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from "utils/index";
+import { capitalizeFirstLetter } from "@utils";
 
 const processPokemonName = (name: string): string => {
   const nameSlice = name.includes("-")

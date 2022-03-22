@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
 
-import { INameURL } from "types/index";
-import { ALL_TYPES_NAME, HYDRATE } from "constants/index";
+import { INameURL } from "@types";
+import { ALL_TYPES_NAME, HYDRATE } from "@constants";
 
 export const SET_POKEMON_TYPES = "SET_POKEMON_TYPES";
 export const SET_ACTIVE_POKEMON_TYPE = "SET_ACTIVE_POKEMON_TYPE";

@@ -1,5 +1,5 @@
-import { IPokemonsState } from "reducers/pokemons";
-import { IPokemonTypesState } from "reducers/pokemonTypes";
+import { IPokemonsState } from "@reducers/pokemons";
+import { IPokemonTypesState } from "@reducers/pokemonTypes";
 
 interface IState {
   pokemons: IPokemonsState;

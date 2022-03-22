@@ -1,4 +1,4 @@
-import { IFlavorTextEntry } from "types/index";
+import { IFlavorTextEntry } from "@types";
 
 const getPokemonFlavorText = (
   flavorTextEntries: IFlavorTextEntry[]

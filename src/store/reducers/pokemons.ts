@@ -1,8 +1,8 @@
 import { AnyAction } from "redux";
 
-import { filterPokemons } from "utils/index";
-import { INameURL, SortOptionsEnum } from "types/index";
-import { DEFAULT_LIMIT_OPTION, HYDRATE } from "constants/index";
+import { filterPokemons } from "@utils";
+import { INameURL, SortOptionsEnum } from "@types";
+import { DEFAULT_LIMIT_OPTION, HYDRATE } from "@constants";
 
 export const SET_PAGE = "SET_PAGE";
 export const SET_LIMIT = "SET_LIMIT";

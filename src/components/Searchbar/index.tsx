@@ -1,12 +1,12 @@
 import React, { useRef, useState, FormEvent, ChangeEvent } from "react";
 import classNames from "classnames";
 
-import { useOutsideClick } from "hooks/index";
-import SearchIcon from "assets/SearchIcon.svg";
+import { SearchIcon } from "@assets";
+import { useOutsideClick } from "@hooks";
 
+import Suggestions from "./Suggestions";
 import { SearchbarProps } from "./types";
 import styles from "./Searchbar.module.scss";
-import Suggestions from "./Suggestions/index";
 
 const Searchbar: React.FC<SearchbarProps> = ({
   options,

@@ -1,4 +1,4 @@
-import { INameURL, IPokemonData, IPokemonSpecies } from "types/index";
+import { INameURL, IPokemonData, IPokemonSpecies } from "@types";
 
 export type PokemonPageProps = {
   genders: string[];

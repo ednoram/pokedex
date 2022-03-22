@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -6,14 +6,15 @@ import {
   getPokemonIdString,
   processPokemonName,
   getPokemonAvatarSrc,
-} from "utils/index";
-import { Loader } from "components/index";
+} from "@utils";
+import { useDelay } from "@hooks";
+import { Loader } from "@components";
 
+import PokemonStats from "./PokemonStats";
+import PokemonInfoGrid from "./PokemonInfoGrid";
+import PokemonEvolutions from "./PokemonEvolutions";
 import { PokemonPageProps } from "./types";
 import styles from "./PokemonPage.module.scss";
-import PokemonStats from "./PokemonStats/index";
-import PokemonInfoGrid from "./PokemonInfoGrid/index";
-import PokemonEvolutions from "./PokemonEvolutions/index";
 
 const PokemonPageContainer: React.FC<PokemonPageProps> = ({
   genders,
@@ -21,17 +22,7 @@ const PokemonPageContainer: React.FC<PokemonPageProps> = ({
   pokemonSpecies,
   evolutionPokemons,
 }) => {
-  const [loadingImage, setLoadingImage] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoadingImage(false);
-    }, 800);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+  const isLoadingImage = useDelay(800);
 
   const idString = getPokemonIdString(pokemonData.id);
   const processedName = processPokemonName(pokemonData.name);
@@ -47,7 +38,7 @@ const PokemonPageContainer: React.FC<PokemonPageProps> = ({
       </h1>
       <div className={styles.container__grid}>
         <div className={styles.container__grid__avatar}>
-          {!loadingImage ? (
+          {!isLoadingImage ? (
             <Image
               width={430}
               height={430}

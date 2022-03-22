@@ -1,6 +1,6 @@
-import { ASSETS_URL } from "constants/index";
-import { getPokemonIdString } from "utils/index";
-import { PokemonAvatarQuality } from "types/index";
+import { ASSETS_URL } from "@constants";
+import { getPokemonIdString } from "@utils";
+import { PokemonAvatarQuality } from "@types";
 
 const getPokemonAvatarSrc = (
   id: number,

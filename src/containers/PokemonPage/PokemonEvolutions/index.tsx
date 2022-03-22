@@ -1,7 +1,7 @@
 import React from "react";
 
-import RightArrow from "assets/RightArrow.svg";
-import { PokemonCard } from "components/index";
+import { RightArrowIcon } from "@assets";
+import { PokemonCard } from "@components";
 
 import { PokemonEvolutionsProps } from "./types";
 import styles from "./PokemonEvolutions.module.scss";
@@ -18,7 +18,7 @@ const PokemonEvolutions: React.FC<PokemonEvolutionsProps> = ({ pokemons }) => {
             <React.Fragment key={name}>
               <PokemonCard url={url} />
               {!isLast && (
-                <RightArrow className={styles.content__list__arrow} />
+                <RightArrowIcon className={styles.content__list__arrow} />
               )}
             </React.Fragment>
           );

@@ -2,11 +2,11 @@ import React from "react";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useDidUpdateEffect } from "hooks/index";
-import { Dropdown, Searchbar } from "components/index";
-import { pokemonActions, pokemonTypesActions } from "actions/index";
-import { pokemonSelectors, pokemonTypesSelectors } from "selectors/index";
-import { ALL_TYPES_NAME, LIMIT_OPTIONS, SORT_OPTIONS } from "constants/index";
+import { useDidUpdateEffect } from "@hooks";
+import { Dropdown, Searchbar } from "@components";
+import { pokemonActions, pokemonTypesActions } from "@actions";
+import { pokemonSelectors, pokemonTypesSelectors } from "@selectors";
+import { ALL_TYPES_NAME, LIMIT_OPTIONS, SORT_OPTIONS } from "@constants";
 
 import styles from "./ListControls.module.scss";
 

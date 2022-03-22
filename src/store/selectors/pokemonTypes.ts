@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-import { IState } from "types/index";
+import { IState } from "@types";
 
 export const selectPokemonTypes = (state: IState) => state.pokemonTypes.types;
 
@@ -9,7 +9,5 @@ export const selectActiveType = (state: IState) =>
 
 export const selectPokemonTypeNames = createSelector(
   selectPokemonTypes,
-  (types) => {
-    return types.map((type) => type.name);
-  }
+  (types) => types.map((type) => type.name)
 );

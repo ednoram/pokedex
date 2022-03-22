@@ -4,8 +4,8 @@ import {
   TABLET_SIZE,
   MOBILE_LIMIT_STEP,
   MOBILE_LOAD_MORE_DELAY,
-} from "constants/index";
-import { useWindowSize } from "hooks/index";
+} from "@constants";
+import { useWindowSize } from "@hooks";
 
 const useMobileLoadMore = ({
   limit,

@@ -5,16 +5,12 @@ import {
   processPokemonName,
   getEvolutionPokemons,
   getPokemonFlavorText,
-} from "utils/index";
-import {
-  getPokemonData,
-  getAllPokemons,
-  getPokemonGenders,
-} from "requests/index";
-import { INameURL } from "types/index";
-import { HelmetLayout } from "layouts/index";
-import { PokemonPageContainer } from "containers/index";
-import { PokemonPageProps } from "containers/PokemonPage/types";
+} from "@utils";
+import { INameURL } from "@types";
+import { HelmetLayout } from "@layouts";
+import { PokemonPageContainer } from "@containers";
+import { PokemonPageProps } from "@containers/PokemonPage/types";
+import { getPokemonData, getAllPokemons, getPokemonGenders } from "@requests";
 
 const PokemonPage: NextPage<PokemonPageProps> = ({
   genders,

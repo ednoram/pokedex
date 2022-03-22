@@ -1,10 +1,10 @@
 import type { NextPage, GetStaticProps } from "next";
 
-import { wrapper } from "store/index";
-import { HelmetLayout } from "layouts/index";
-import { HomeContainer } from "containers/index";
-import { getAllPokemons, getPokemonTypes } from "requests/index";
-import { pokemonActions, pokemonTypesActions } from "actions/index";
+import { wrapper } from "@store";
+import { HelmetLayout } from "@layouts";
+import { HomeContainer } from "@containers";
+import { getAllPokemons, getPokemonTypes } from "@requests";
+import { pokemonActions, pokemonTypesActions } from "@actions";
 
 const Home: NextPage = () => {
   return (

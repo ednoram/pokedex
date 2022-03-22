@@ -1,4 +1,4 @@
-import { IPokemonStat } from "types/index";
+import { IPokemonStat } from "@types";
 
 export type PokemonStatsProps = {
   pokemonStats: IPokemonStat[];

@@ -2,8 +2,8 @@ import type { AppProps } from "next/app";
 import Router from "next/router";
 import NProgress from "nprogress";
 
-import "styles/index.scss";
-import { wrapper } from "store/index";
+import "@styles/index.scss";
+import { wrapper } from "@store";
 
 Router.events.on("routeChangeError", () => NProgress.done());
 Router.events.on("routeChangeStart", () => NProgress.start());

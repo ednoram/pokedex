@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+const path = require("path");
 const withPWA = require("next-pwa");
 
 const nextConfig = withPWA({
@@ -20,7 +21,7 @@ const nextConfig = withPWA({
   sassOptions: {
     prependData:
       ["variables", "animations", "mixins", "breakpoints"]
-        .map((fileName) => `@import "styles/${fileName}.scss";`)
+        .map((fileName) => `@import "@styles/${fileName}.scss";`)
         .join("\n") + "\n\n",
   },
 });

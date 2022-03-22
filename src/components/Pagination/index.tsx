@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { getPaginationButtonNames } from "utils/index";
+import { getPaginationButtonNames } from "@utils";
 
 import { PaginationTypes } from "./types";
 import styles from "./Pagination.module.scss";

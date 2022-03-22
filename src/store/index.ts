@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 import { createWrapper } from "next-redux-wrapper";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
-import { IState } from "types/index";
+import { IState } from "@types";
 
 import { pokemonsReducer, pokemonTypesReducer } from "./reducers";
 

@@ -1,8 +1,8 @@
 import { createSelector } from "reselect";
 
-import { IState } from "types/index";
-import { IPokemonsState } from "reducers/pokemons";
-import { filterPokemons, getPokemonSortFunction } from "utils/index";
+import { IState } from "@types";
+import { IPokemonsState } from "@reducers/pokemons";
+import { filterPokemons, getPokemonSortFunction } from "@utils";
 
 export const selectPokemonsData = (state: IState) => state.pokemons;
 

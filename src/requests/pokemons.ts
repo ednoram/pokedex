@@ -1,8 +1,8 @@
 import { compact } from "lodash";
 
-import { API } from "utils/index";
-import { INameURL, PokemonGenderEnum } from "types/index";
-import { MAX_POKEMON_COUNT, UNKNOWN_TYPE_NAME } from "constants/index";
+import { API } from "@utils";
+import { INameURL, PokemonGenderEnum } from "@types";
+import { MAX_POKEMON_COUNT, UNKNOWN_TYPE_NAME } from "@constants";
 
 export const getAllPokemons = async () => {
   const { data } = await API.get("pokemon", {

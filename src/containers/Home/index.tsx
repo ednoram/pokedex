@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { INameURL } from "types/index";
-import { pokemonActions } from "actions/index";
-import { pokemonSelectors } from "selectors/index";
-import { Pagination, PokemonCard, Loader } from "components/index";
+import { INameURL } from "@types";
+import { pokemonActions } from "@actions";
+import { pokemonSelectors } from "@selectors";
+import { Pagination, PokemonCard, Loader } from "@components";
 
+import LoadMore from "./LoadMore";
+import ListControls from "./ListControls";
 import styles from "./Home.module.scss";
-import LoadMore from "./LoadMore/index";
-import ListControls from "./ListControls/index";
 
 const HomeContainer: React.FC = () => {
   const visiblePokemons = useSelector(pokemonSelectors.selectVisiblePokemons);

@@ -3,8 +3,8 @@ import { uniq } from "lodash";
 import classNames from "classnames";
 import { useToggle } from "react-use";
 
-import { useOutsideClick } from "hooks/index";
-import RightArrow from "assets/RightArrow.svg";
+import { RightArrowIcon } from "@assets";
+import { useOutsideClick } from "@hooks";
 
 import { DropdownProps } from "./types";
 import styles from "./Dropdown.module.scss";
@@ -65,7 +65,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         className={headClasses}
       >
         <p>{selectedOption}</p>
-        <RightArrow className={arrowClasses} />
+        <RightArrowIcon className={arrowClasses} />
       </div>
       {isOpen && <div className={optionsClasses}>{optionsList}</div>}
     </div>

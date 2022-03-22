@@ -1,4 +1,4 @@
-import { INameURL } from "types/index";
+import { INameURL } from "@types";
 
 export type PokemonEvolutionsProps = {
   pokemons: INameURL[];
