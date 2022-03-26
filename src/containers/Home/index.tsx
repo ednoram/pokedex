@@ -1,37 +1,20 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { INameURL } from "@types";
 import { pokemonActions } from "@actions";
 import { pokemonSelectors } from "@selectors";
-import { Pagination, PokemonCard, Loader } from "@components";
+import { Pagination, Loader } from "@components";
 
 import LoadMore from "./LoadMore";
 import ListControls from "./ListControls";
 import styles from "./Home.module.scss";
+import PokemonsList from "@containers/Home/PokemonsList";
 
 const HomeContainer: React.FC = () => {
-  const visiblePokemons = useSelector(pokemonSelectors.selectVisiblePokemons);
   const { count, limit } = useSelector(pokemonSelectors.selectPaginationParams);
   const currentPage = useSelector(pokemonSelectors.selectCurrentPage);
   const searchValue = useSelector(pokemonSelectors.selectSearchValue);
   const isLoading = useSelector(pokemonSelectors.selectPokemonsLoading);
-
-  const pokemonsList = useMemo(
-    () =>
-      visiblePokemons.length ? (
-        <ul className={styles.container__list}>
-          {visiblePokemons.map(({ url, name }: INameURL) => (
-            <li key={name}>
-              <PokemonCard url={url} className={styles.container__list__card} />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className={styles.container__empty_list}>Nothing was found</p>
-      ),
-    [visiblePokemons]
-  );
 
   const dispatch = useDispatch();
 
@@ -58,7 +41,7 @@ const HomeContainer: React.FC = () => {
         </div>
       ) : (
         <React.Fragment>
-          {pokemonsList}
+          <PokemonsList />
           <div className={styles.container__pagination}>
             <Pagination
               limit={limit}

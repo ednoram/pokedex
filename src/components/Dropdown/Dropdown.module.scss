@@ -36,16 +36,5 @@
     width: 100%;
     z-index: 99;
     background: white;
-
-    &__item {
-      padding: 8px 12px;
-      text-align: center;
-      cursor: pointer;
-
-      &:hover {
-        background: $primary-color;
-        color: white;
-      }
-    }
   }
 }

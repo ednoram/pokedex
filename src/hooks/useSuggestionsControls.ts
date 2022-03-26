@@ -1,5 +1,7 @@
 import { useState, useEffect, RefObject } from "react";
 
+import { VoidFunction } from "@types";
+
 const useSuggestionsControls = ({
   inputRef,
   submitForm,
@@ -9,7 +11,7 @@ const useSuggestionsControls = ({
 }: {
   inputValue: string;
   suggestions: string[];
-  submitForm: () => void;
+  submitForm: VoidFunction;
   inputRef: RefObject<HTMLInputElement>;
   setInputValue: (value: string) => void;
 }) => {

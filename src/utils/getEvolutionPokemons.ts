@@ -16,10 +16,11 @@ const getEvolutionPokemons = async (
 
   const pokemonsPromises = speciesUrls.map(async (url) => {
     const { data } = await axios.get(url);
+
     return data.varieties[0].pokemon;
   });
 
-  return await Promise.all(pokemonsPromises);
+  return Promise.all(pokemonsPromises);
 };
 
 export default getEvolutionPokemons;

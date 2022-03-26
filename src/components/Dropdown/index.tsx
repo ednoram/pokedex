@@ -8,6 +8,7 @@ import { useOutsideClick } from "@hooks";
 
 import { DropdownProps } from "./types";
 import styles from "./Dropdown.module.scss";
+import DropdownOption from "./DropdownOption";
 
 const Dropdown: React.FC<DropdownProps> = ({
   className,
@@ -36,23 +37,14 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const optionsList = useMemo(
     () =>
-      uniq(options).map((option) => {
-        const handleClick = () => {
-          setSelectedOption(option);
-          closeDropdown();
-        };
-
-        return (
-          <div
-            role="button"
-            key={option}
-            onClick={handleClick}
-            className={styles.dropdown__options__item}
-          >
-            <p>{option}</p>
-          </div>
-        );
-      }),
+      uniq(options).map((option) => (
+        <DropdownOption
+          key={option}
+          option={option}
+          closeDropdown={closeDropdown}
+          setSelectedOption={setSelectedOption}
+        />
+      )),
     [options]
   );
 

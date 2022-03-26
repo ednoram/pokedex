@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { uniq } from "lodash";
 import { nanoid } from "nanoid";
 
-import { processPokemonName } from "@utils";
+import { getPokemonSuggestions } from "@utils";
 import { useSuggestionsControls } from "@hooks";
+
+import SuggestionOption from "../SuggestionOption";
 
 import { SuggestionsProps } from "./types";
 import styles from "./Suggestions.module.scss";
-
-const MAX_SUGGESTIONS = 5;
 
 const Suggestions: React.FC<SuggestionsProps> = ({
   options,
@@ -26,21 +26,10 @@ const Suggestions: React.FC<SuggestionsProps> = ({
     suggestions.length === 1 &&
     suggestions[0].toLowerCase() === inputFilterValue;
 
-  const getSuggestions = (value: string) =>
-    options
-      .filter((option) => {
-        const lowercaseOption = option.toLowerCase();
-        const lowercaseInputValue = value.toLowerCase();
-
-        return lowercaseOption.includes(lowercaseInputValue);
-      })
-      .slice(0, MAX_SUGGESTIONS)
-      .map((name) => processPokemonName(name));
-
   useEffect(() => {
-    const newSuggestions = getSuggestions(inputValue.trim());
+    const newSuggestions = getPokemonSuggestions(options, inputValue.trim());
     setSuggestions(uniq(newSuggestions));
-  }, [inputValue]);
+  }, [inputValue, options]);
 
   useSuggestionsControls({
     inputRef,
@@ -50,26 +39,17 @@ const Suggestions: React.FC<SuggestionsProps> = ({
     setInputValue,
   });
 
-  return isInputFocused && isInputValueEmpty && !optionIsInputValue ? (
-    <ul className={styles.suggestions}>
-      {suggestions.map((option) => {
-        const handleClick = () => {
-          setInputValue(option);
-          setTimeout(submitForm);
-        };
+  const suggestionOptions = suggestions.map((option) => (
+    <SuggestionOption
+      key={nanoid()}
+      option={option}
+      submitForm={submitForm}
+      setInputValue={setInputValue}
+    />
+  ));
 
-        return (
-          <li
-            role="button"
-            key={nanoid()}
-            onClick={handleClick}
-            className={styles.suggestions__option}
-          >
-            {option}
-          </li>
-        );
-      })}
-    </ul>
+  return isInputFocused && isInputValueEmpty && !optionIsInputValue ? (
+    <ul className={styles.suggestions}>{suggestionOptions}</ul>
   ) : (
     <React.Fragment />
   );
