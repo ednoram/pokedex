@@ -6,16 +6,14 @@ interface Props {
   metaDescription: string;
 }
 
-const HelmetLayout: FC<Props> = ({ children, title, metaDescription }) => {
-  return (
-    <React.Fragment>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={metaDescription} />
-      </Head>
-      <main>{children}</main>
-    </React.Fragment>
-  );
-};
+const HelmetLayout: FC<Props> = ({ children, title, metaDescription }) => (
+  <React.Fragment>
+    <Head>
+      <title>{title}</title>
+      <meta name="description" content={metaDescription} />
+    </Head>
+    <main>{children}</main>
+  </React.Fragment>
+);
 
 export default HelmetLayout;

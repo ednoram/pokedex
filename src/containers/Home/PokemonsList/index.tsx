@@ -19,7 +19,7 @@ const PokemonsList: React.FC = () => {
   return visiblePokemons.length ? (
     <ul className={styles.list}>{listItems}</ul>
   ) : (
-    <p className={styles.container__empty_list}>Nothing was found</p>
+    <p className={styles.empty_list}>Nothing was found</p>
   );
 };
 

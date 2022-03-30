@@ -21,20 +21,22 @@ const PokemonInfoGrid: React.FC<PokemonInfoGridProps> = ({
 
   const category = foundGenus ? foundGenus.replace("Pokémon", "") : "unknown";
 
+  const genderTexts = genders.map((item) => <p key={item}>{item}</p>);
+
   const types = useMemo(
     () =>
-      pokemonData.types.map((item) => (
-        <p key={item.type.name}>{item.type.name}</p>
-      )),
+      pokemonData.types.map(({ type }) => <p key={type.name}>{type.name}</p>),
     [pokemonData]
   );
 
   const abilities = useMemo(
     () =>
       pokemonData.abilities.reduce((acc, { ability, is_hidden }) => {
-        const node = !is_hidden && <p key={ability.name}>{ability.name}</p>;
+        if (!is_hidden) {
+          acc.push(<p key={ability.name}>{ability.name}</p>);
+        }
 
-        return node ? [...acc, node] : acc;
+        return acc;
       }, [] as React.ReactNode[]),
     [pokemonData]
   );
@@ -67,11 +69,7 @@ const PokemonInfoGrid: React.FC<PokemonInfoGridProps> = ({
       </div>
       <div className={styles.content__item}>
         <p className={styles.content__item__heading}>Genders</p>
-        {genders.length ? (
-          genders.map((item) => <p key={item}>{item}</p>)
-        ) : (
-          <p>None</p>
-        )}
+        {genders.length ? genderTexts : <p>none</p>}
       </div>
     </div>
   );

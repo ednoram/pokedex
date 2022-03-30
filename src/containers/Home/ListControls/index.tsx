@@ -8,6 +8,8 @@ import { pokemonActions, pokemonTypesActions } from "@actions";
 import { pokemonSelectors, pokemonTypesSelectors } from "@selectors";
 import { ALL_TYPES_NAME, LIMIT_OPTIONS, SORT_OPTIONS } from "@constants";
 
+const LIMIT_STRING_OPTIONS = LIMIT_OPTIONS.map((item) => String(item));
+
 import styles from "./ListControls.module.scss";
 
 const ListControls: React.FC = () => {
@@ -23,7 +25,6 @@ const ListControls: React.FC = () => {
 
   const searchSuggestions = typeFilteredPokemons.map((pokemon) => pokemon.name);
 
-  const limitStringOptions = LIMIT_OPTIONS.map((item) => String(item));
   const pokemonTypesOptions = [ALL_TYPES_NAME, ...pokemonTypeNames];
 
   const typesDropdownClasses = classNames(
@@ -80,7 +81,7 @@ const ListControls: React.FC = () => {
       <div className={styles.controls__right}>
         <p>Show per page: </p>
         <Dropdown
-          options={limitStringOptions}
+          options={LIMIT_STRING_OPTIONS}
           selectedOption={String(limit)}
           setSelectedOption={setLimitValue}
         />

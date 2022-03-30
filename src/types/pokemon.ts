@@ -33,12 +33,14 @@ export interface IPokemonTypeItem {
 }
 
 export interface IPokemonStat {
-  base_stat: number;
+  url: string;
+  name: PokemonStatName;
+}
+
+export interface IPokemonStatData {
   effort: 1;
-  stat: {
-    url: string;
-    name: PokemonStatName;
-  };
+  base_stat: number;
+  stat: IPokemonStat;
 }
 
 export interface IPokemonData {
@@ -47,7 +49,7 @@ export interface IPokemonData {
   height: number;
   weight: number;
   species: INameURL;
-  stats: IPokemonStat[];
+  stats: IPokemonStatData[];
   types: IPokemonTypeItem[];
   abilities: IAbilityItem[];
 }

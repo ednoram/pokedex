@@ -40,6 +40,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ url, className }) => {
           <Link href={pokemonRoute}>
             <div className={styles.content__avatar}>
               <Image
+                loading="lazy"
                 alt="pokemon avatar"
                 width={IMAGE_RESOLUTION}
                 height={IMAGE_RESOLUTION}

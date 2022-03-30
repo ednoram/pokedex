@@ -1,54 +1,17 @@
-import React, { useCallback, useMemo } from "react";
-import classNames from "classnames";
+import React, { useMemo } from "react";
 
-import { PokemonStatName } from "@types";
-import { HP_TEXT, MAX_STAT_VALUES } from "@constants";
+import StatColumn from "../StatColumn";
 
 import { PokemonStatsProps } from "./types";
 import styles from "./PokemonStats.module.scss";
 
 const PokemonStats: React.FC<PokemonStatsProps> = ({ pokemonStats }) => {
-  const blockNumbers = Array.from({ length: 15 }, (_, index) => index);
-
-  const getBlockClassName = useCallback(
-    (number: number, statName: PokemonStatName, baseStat: number) => {
-      const isLast = number === blockNumbers.length - 1;
-      const maxValue = MAX_STAT_VALUES[statName];
-      const progress = (baseStat / maxValue) * 15;
-      const hasPassed = progress >= blockNumbers.length - number;
-
-      return classNames(styles.content__stats__bar__block, {
-        [styles.content__stats__bar__block_filled]: hasPassed || isLast,
-      });
-    },
-    []
-  );
-
   const statsSection = useMemo(
     () =>
-      pokemonStats.map(({ stat, base_stat }) => {
-        const nameWithoutDash = stat.name.replace("-", " ");
-        const statName =
-          stat.name === HP_TEXT.toLowerCase() ? HP_TEXT : nameWithoutDash;
-
-        return (
-          <div key={stat.name}>
-            <div className={styles.content__stats__bar}>
-              {blockNumbers.map((number) => {
-                const className = getBlockClassName(
-                  number,
-                  stat.name,
-                  base_stat
-                );
-
-                return <div key={number} className={className} />;
-              })}
-            </div>
-            <p className={styles.content__stats__name}>{statName}</p>
-          </div>
-        );
-      }),
-    [pokemonStats, getBlockClassName]
+      pokemonStats.map(({ stat, base_stat }) => (
+        <StatColumn key={stat.name} stat={stat} baseStat={base_stat} />
+      )),
+    [pokemonStats]
   );
 
   return (

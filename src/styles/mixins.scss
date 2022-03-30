@@ -25,3 +25,13 @@
   justify-content: space-between;
   flex-direction: $direction;
 }
+
+@mixin pagination-button($width: 40px) {
+  width: $width;
+  background-color: white;
+  color: $primary-color;
+  user-select: none;
+  height: 40px;
+  padding: 10px;
+  font-weight: 500;
+}

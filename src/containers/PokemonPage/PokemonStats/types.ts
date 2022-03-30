@@ -1,5 +1,5 @@
-import { IPokemonStat } from "@types";
+import { IPokemonStatData } from "@types";
 
 export type PokemonStatsProps = {
-  pokemonStats: IPokemonStat[];
+  pokemonStats: IPokemonStatData[];
 };

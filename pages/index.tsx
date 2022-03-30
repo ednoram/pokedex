@@ -6,16 +6,14 @@ import { HomeContainer } from "@containers";
 import { getAllPokemons, getPokemonTypes } from "@requests";
 import { pokemonActions, pokemonTypesActions } from "@actions";
 
-const Home: NextPage = () => {
-  return (
-    <HelmetLayout
-      title="Pokédex"
-      metaDescription="Explore Pokémon from the original Pokémon API."
-    >
-      <HomeContainer />
-    </HelmetLayout>
-  );
-};
+const Home: NextPage = () => (
+  <HelmetLayout
+    title="Pokédex"
+    metaDescription="Explore Pokémon from the original Pokémon API."
+  >
+    <HomeContainer />
+  </HelmetLayout>
+);
 
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   (store) => async () => {

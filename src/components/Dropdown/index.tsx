@@ -21,6 +21,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const containerClasses = classNames(styles.dropdown, className);
   const headClasses = classNames(styles.dropdown__head, {
     [styles.dropdown__head_active]: isOpen,
   });
@@ -29,7 +30,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   });
   const optionsClasses = classNames(styles.dropdown__options, optionsClassName);
 
-  const closeDropdown = () => {
+  const closeDropdown = (): void => {
     toggleIsOpen(false);
   };
 
@@ -49,7 +50,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   );
 
   return (
-    <div className={classNames(styles.dropdown, className)}>
+    <div className={containerClasses}>
       <div
         role="button"
         ref={dropdownRef}

@@ -6,9 +6,9 @@ import { pokemonSelectors } from "@selectors";
 import { Pagination, Loader } from "@components";
 
 import LoadMore from "./LoadMore";
-import ListControls from "./ListControls";
 import styles from "./Home.module.scss";
-import PokemonsList from "@containers/Home/PokemonsList";
+import PokemonsList from "./PokemonsList";
+import ListControls from "./ListControls";
 
 const HomeContainer: React.FC = () => {
   const { count, limit } = useSelector(pokemonSelectors.selectPaginationParams);

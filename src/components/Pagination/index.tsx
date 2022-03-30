@@ -1,8 +1,8 @@
 import React from "react";
-import classNames from "classnames";
 
 import { getPaginationButtonNames } from "@utils";
 
+import PageButton from "./PageButton";
 import { PaginationTypes } from "./types";
 import styles from "./Pagination.module.scss";
 
@@ -13,6 +13,7 @@ const Pagination: React.FC<PaginationTypes> = ({
   currentPage,
 }) => {
   const lastPage = Math.ceil(totalCount / limit);
+  const isHidden = totalCount <= limit;
 
   const buttonNames = getPaginationButtonNames({
     limit,
@@ -20,7 +21,14 @@ const Pagination: React.FC<PaginationTypes> = ({
     currentPage,
   });
 
-  const isHidden = totalCount <= limit;
+  const pageButtons = buttonNames.map((name) => (
+    <PageButton
+      key={name}
+      name={name}
+      setPage={setPage}
+      currentPage={currentPage}
+    />
+  ));
 
   const handlePrevPageClick = () => {
     setPage(currentPage - 1);
@@ -42,23 +50,7 @@ const Pagination: React.FC<PaginationTypes> = ({
           Prev.
         </button>
       </li>
-      {buttonNames.map((name) => {
-        const buttonName = `${name} page`;
-
-        return (
-          <li key={name}>
-            <button
-              name={buttonName}
-              onClick={() => setPage(name)}
-              className={classNames(styles.content__button, {
-                [styles.content__button_active]: name === currentPage,
-              })}
-            >
-              {name}
-            </button>
-          </li>
-        );
-      })}
+      {pageButtons}
       <li>
         <button
           name="next page"
