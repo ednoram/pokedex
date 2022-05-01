@@ -7,8 +7,6 @@ import {
   processPokemonName,
   getPokemonAvatarSrc,
 } from "@utils";
-import { useDelay } from "@hooks";
-import { Loader } from "@components";
 
 import PokemonStats from "./PokemonStats";
 import PokemonInfoGrid from "./PokemonInfoGrid";
@@ -22,8 +20,6 @@ const PokemonPageContainer: React.FC<PokemonPageProps> = ({
   pokemonSpecies,
   evolutionPokemons,
 }) => {
-  const isLoadingImage = useDelay(800);
-
   const idString = getPokemonIdString(pokemonData.id);
   const processedName = processPokemonName(pokemonData.name);
   const avatarImageSrc = getPokemonAvatarSrc(pokemonData.id, { full: true });
@@ -38,17 +34,13 @@ const PokemonPageContainer: React.FC<PokemonPageProps> = ({
       </h1>
       <div className={styles.container__grid}>
         <div className={styles.container__grid__avatar}>
-          {!isLoadingImage ? (
-            <Image
-              width={430}
-              height={430}
-              priority={true}
-              alt="pokemon avatar"
-              src={avatarImageSrc}
-            />
-          ) : (
-            <Loader />
-          )}
+          <Image
+            width={430}
+            height={430}
+            priority={true}
+            alt="pokemon avatar"
+            src={avatarImageSrc}
+          />
         </div>
         <div>
           <p className={styles.container__grid__flavor_text}>
